@@ -1,0 +1,3 @@
+cd /var/www/html
+composer init --no-interaction
+composer require square/square
