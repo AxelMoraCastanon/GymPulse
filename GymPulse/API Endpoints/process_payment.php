@@ -1,15 +1,15 @@
 <?php
 include 'db_connection.php';
+include 'square_config.php'; // Include Square configuration
 require 'vendor/autoload.php';
 
 use Square\SquareClient;
 use Square\Exceptions\ApiException;
 use Square\Models\CreatePaymentRequest;
 
-$client = new SquareClient([
-    'accessToken' => 'YOUR_ACCESS_TOKEN',
-    'environment' => 'sandbox' // or 'production'
-]);
+// Get Square configurations
+$config = include 'square_config.php';
+$client = new SquareClient($config);
 
 $data = json_decode(file_get_contents("php://input"));
 
