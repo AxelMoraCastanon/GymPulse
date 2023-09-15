@@ -13,7 +13,7 @@ $client = new SquareClient([
 
 $data = json_decode(file_get_contents("php://input"));
 
-if(isset($data->amount) && isset($data->nonce)){
+if(isset($data->client_id) && isset($data->trainer_id) && isset($data->amount) && isset($data->nonce)){
     $money = new \Square\Models\Money();
     $money->setAmount((int)($data->amount * 100)); // Convert to cents
     $money->setCurrency('USD');
@@ -22,7 +22,12 @@ if(isset($data->amount) && isset($data->nonce)){
 
     try {
         $response = $client->getPaymentsApi()->createPayment($request);
-        echo json_encode(["message" => "Payment successful", "payment" => $response->getResult()->getPayment()]);
+        
+        // If payment is successful, add to database
+        $stmt = $pdo->prepare("INSERT INTO payments (client_id, trainer_id, amount, payment_date, payment_status, payment_method) VALUES (?, ?, ?, NOW(), ?, ?)");
+        $stmt->execute([$data->client_id, $data->trainer_id, $data->amount, $response->getResult()->getPayment()->getStatus(), 'Square']);
+        
+        echo json_encode(["message" => "Payment successful and added to database", "payment" => $response->getResult()->getPayment()]);
     } catch (ApiException $e) {
         echo json_encode(["message" => "Payment failed", "error" => $e->getResponseBody()]);
     }
