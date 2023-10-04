@@ -1,16 +1,13 @@
 <?php
 include 'db_connection.php';
 
-$client_id = $_POST['client_id'];
-$first_name = $_POST['first_name'];
-$last_name = $_POST['last_name'];
-$email = $_POST['email'];
-$phone_number = $_POST['phone_number'];
+$data = json_decode(file_get_contents("php://input"));
 
-$query = "UPDATE clients SET first_name = ?, last_name = ?, email = ?, phone_number = ? WHERE client_id = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("ssssi", $first_name, $last_name, $email, $phone_number, $client_id);
-$stmt->execute();
-
-echo json_encode(["status" => "success", "message" => "Client details updated successfully"]);
+if(isset($data->client_id) && isset($data->first_name) && isset($data->last_name) && isset($data->email) && isset($data->phone_number)){
+    $stmt = $pdo->prepare("UPDATE clients SET first_name = ?, last_name = ?, email = ?, phone_number = ? WHERE client_id = ?");
+    $stmt->execute([$data->first_name, $data->last_name, $data->email, $data->phone_number, $data->client_id]);
+    echo json_encode(["message" => "Client details updated successfully"]);
+} else {
+    echo json_encode(["message" => "Invalid input"]);
+}
 ?>

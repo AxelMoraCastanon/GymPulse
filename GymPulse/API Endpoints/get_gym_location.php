@@ -3,12 +3,9 @@ include 'db_connection.php';
 
 $location_id = $_GET['location_id'];
 
-$query = "SELECT address FROM locations WHERE location_id = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $location_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
+$stmt = $pdo->prepare("SELECT address FROM locations WHERE location_id = ?");
+$stmt->execute([$location_id]);
+$row = $stmt->fetch();
 
 echo json_encode($row);
 ?>
