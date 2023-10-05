@@ -37,21 +37,21 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="upc-Jw-sf4">
-                                <rect key="frame" x="16" y="145" width="361" height="615"/>
+                                <rect key="frame" x="16" y="145" width="361" height="650"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="HaQ-mJ-uDv" kind="embed" id="FTN-1r-H2u"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVb-jx-cBg">
-                                <rect key="frame" x="16" y="145" width="361" height="615"/>
+                                <rect key="frame" x="16" y="145" width="361" height="650"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="P0g-oi-o4H" kind="embed" id="96L-be-StH"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKR-xe-rRH">
-                                <rect key="frame" x="16" y="768" width="195" height="21"/>
+                                <rect key="frame" x="16" y="811" width="195" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -59,7 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcL-cc-uPT">
-                                <rect key="frame" x="219" y="760" width="71" height="35"/>
+                                <rect key="frame" x="219" y="797" width="71" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
@@ -82,14 +82,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-225" y="-65"/>
+            <point key="canvasLocation" x="-225.19083969465649" y="-65.492957746478879"/>
         </scene>
         <!--Client Sign Up Controller-->
         <scene sceneID="Ayq-oO-xy7">
             <objects>
                 <viewController id="HaQ-mJ-uDv" customClass="ClientSignUpController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sLb-Bi-jGV">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="615"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="650"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1WK-xG-IWU">
@@ -244,7 +244,7 @@
             <objects>
                 <viewController id="P0g-oi-o4H" customClass="TrainerSignUpController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VyI-ab-RFk">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="615"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="650"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cd5-pE-KdQ">
@@ -260,7 +260,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="Wnz-p6-2op"/>
+                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="DFW-kV-MQh"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Kj-9M-uUC">
@@ -283,7 +283,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="8yT-Uh-wls"/>
+                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="lMy-eV-rJw"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXe-7f-au8">
@@ -306,7 +306,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="Huv-YH-8Nh"/>
+                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="r9f-Cm-9fX"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="368-QP-DDa">
@@ -329,7 +329,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="5me-DC-gQw"/>
+                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="nwx-AS-saf"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAh-OR-T3E">
@@ -352,7 +352,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="meF-xD-CZ4"/>
+                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="26D-mm-HAj"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhN-Rd-CV5">
@@ -363,7 +363,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3fG-XS-d9E">
-                                <rect key="frame" x="16" y="482" width="314.33333333333348" height="34"/>
+                                <rect key="frame" x="16" y="564" width="314.33333333333348" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -375,49 +375,74 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="2Az-X9-aKj"/>
+                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="oVg-Vn-12M"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4r-lT-BLK">
-                                <rect key="frame" x="16" y="524" width="68" height="44"/>
+                                <rect key="frame" x="16" y="606" width="68" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PKw-A4-Ebk">
-                                <rect key="frame" x="138" y="546" width="84" height="35"/>
+                                <rect key="frame" x="138" y="615" width="84" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Sign Up"/>
                                 <connections>
-                                    <action selector="signUpAction:" destination="P0g-oi-o4H" eventType="touchUpInside" id="MfA-im-x1B"/>
+                                    <action selector="signUpAction:" destination="P0g-oi-o4H" eventType="touchUpInside" id="f3a-7c-W32"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gym Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eJp-Ai-wO7">
+                                <rect key="frame" x="16" y="482" width="314.33333333333348" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textFieldChanged:" destination="P0g-oi-o4H" eventType="editingDidEnd" id="e2f-v3-7dO"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xyo-FF-k1a">
+                                <rect key="frame" x="16" y="524" width="68" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cQ1-60-1Sl"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
-                        <outlet property="emailErrorLabel" destination="368-QP-DDa" id="csE-Xl-Ou4"/>
-                        <outlet property="emailTF" destination="kFO-9b-djo" id="ezG-HE-Mk0"/>
-                        <outlet property="firstNameErrorLabel" destination="4Kj-9M-uUC" id="zC9-nP-U4j"/>
-                        <outlet property="firstNameTF" destination="Cd5-pE-KdQ" id="li0-7R-LW8"/>
-                        <outlet property="gymNameErrorLabel" destination="EhN-Rd-CV5" id="IPf-O0-H4B"/>
-                        <outlet property="gymNameTF" destination="GOf-0u-6ma" id="bhr-um-Afk"/>
-                        <outlet property="lastNameErrorLabel" destination="aXe-7f-au8" id="RUx-nT-QHM"/>
-                        <outlet property="lastNameTF" destination="pVS-od-z4c" id="B1A-b8-Jiw"/>
-                        <outlet property="passwordErrorLabel" destination="Y4r-lT-BLK" id="eMb-iS-1rE"/>
-                        <outlet property="passwordTF" destination="3fG-XS-d9E" id="f8H-AE-BaU"/>
-                        <outlet property="phoneNumberErrorLabel" destination="rAh-OR-T3E" id="m7W-iX-gcD"/>
-                        <outlet property="phoneNumberTF" destination="uW3-7z-Y4h" id="1sO-66-hEN"/>
-                        <outlet property="signUpButton" destination="PKw-A4-Ebk" id="t4Y-aM-ImQ"/>
+                        <outlet property="emailErrorLabel" destination="368-QP-DDa" id="BGT-9h-lQA"/>
+                        <outlet property="emailTF" destination="kFO-9b-djo" id="JIZ-Iq-Q4P"/>
+                        <outlet property="firstNameErrorLabel" destination="4Kj-9M-uUC" id="TDN-Nu-vH7"/>
+                        <outlet property="firstNameTF" destination="Cd5-pE-KdQ" id="SaA-QP-FtB"/>
+                        <outlet property="gymAddressErrorLabel" destination="xyo-FF-k1a" id="i47-q5-0jN"/>
+                        <outlet property="gymAddressTF" destination="eJp-Ai-wO7" id="pqH-5m-p1K"/>
+                        <outlet property="gymNameErrorLabel" destination="EhN-Rd-CV5" id="Jcu-Un-dOe"/>
+                        <outlet property="gymNameTF" destination="GOf-0u-6ma" id="pbJ-dv-oKk"/>
+                        <outlet property="lastNameErrorLabel" destination="aXe-7f-au8" id="MNZ-zg-y8m"/>
+                        <outlet property="lastNameTF" destination="pVS-od-z4c" id="ccY-yq-Wse"/>
+                        <outlet property="passwordErrorLabel" destination="Y4r-lT-BLK" id="Aal-iA-cib"/>
+                        <outlet property="passwordTF" destination="3fG-XS-d9E" id="ZL6-nq-G8H"/>
+                        <outlet property="phoneNumberErrorLabel" destination="rAh-OR-T3E" id="OAq-LI-tWN"/>
+                        <outlet property="phoneNumberTF" destination="uW3-7z-Y4h" id="pvI-Pz-UQd"/>
+                        <outlet property="signUpButton" destination="PKw-A4-Ebk" id="BNR-DT-MpL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ACe-yb-pWx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="830" y="183"/>
+            <point key="canvasLocation" x="830" y="217"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="VQB-AJ-DnY">
