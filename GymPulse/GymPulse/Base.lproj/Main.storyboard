@@ -444,10 +444,10 @@
             </objects>
             <point key="canvasLocation" x="830" y="217"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Log In View Controller-->
         <scene sceneID="VQB-AJ-DnY">
             <objects>
-                <viewController id="kzx-Cv-k9T" customClass="SignUpViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kzx-Cv-k9T" customClass="LogInViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wW1-i1-gMg">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

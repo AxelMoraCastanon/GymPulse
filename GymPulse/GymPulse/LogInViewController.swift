@@ -1,24 +1,14 @@
-//
-//  LogInViewController.swift
-//  GymPulse
-//
-//  Created by Axel Mora on 10/3/23.
-//
-
+// LogInViewController.swift
 import UIKit
 
 class LogInViewController: UIViewController {
 
     @IBOutlet weak var segmentOutlet: UISegmentedControl!
-    
     @IBOutlet weak var ClientSegmentView: UIView!
-    
     @IBOutlet weak var TrainerSegmentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
         self.view.bringSubviewToFront(ClientSegmentView)
     }
 
@@ -32,7 +22,4 @@ class LogInViewController: UIViewController {
             break
         }
     }
-    
-    
-    
 }
