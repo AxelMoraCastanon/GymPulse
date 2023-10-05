@@ -51,7 +51,7 @@ class TrainerLogInController: UIViewController, UITextViewDelegate {
             "password": passwordTF.text!
         ]
         
-        sendDataToAPI(data: trainerData, endpoint: "login_trainer.php") { response in
+        sendDataToAPI(data: trainerData, endpoint: "login_trainer.php") { [weak self] response in
             if let status = response["status"] as? String, status == "success" {
                 // Handle successful login
                 print("Login successful!")
@@ -62,6 +62,8 @@ class TrainerLogInController: UIViewController, UITextViewDelegate {
                 // Handle error
                 print("Login failed:", response["message"] ?? "Unknown error")
             }
+            // Reset the form after the API call
+            self?.resetForm()
         }
     }
     
