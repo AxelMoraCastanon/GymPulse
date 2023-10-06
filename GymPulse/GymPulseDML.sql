@@ -6,14 +6,14 @@ INSERT INTO locations (gym_name, address) VALUES
 ('GymPulse West', '456 Muscle Blvd, City, Country');
 
 -- Inserting sample data into `trainers` table
-INSERT INTO trainers (first_name, last_name, email, phone_number, location_id) VALUES
-('John', 'Doe', 'john.doe@email.com', '1234567890', 1),
-('Jane', 'Smith', 'jane.smith@email.com', '0987654321', 2);
+INSERT INTO trainers (first_name, last_name, email, phone_number, location_id, password) VALUES
+('John', 'Doe', 'john.doe@email.com', '1234567890', 1, 'password123'),
+('Jane', 'Smith', 'jane.smith@email.com', '0987654321', 2, 'password456');
 
 -- Inserting sample data into `clients` table
-INSERT INTO clients (first_name, last_name, email, phone_number) VALUES
-('Alice', 'Johnson', 'alice.johnson@email.com', '1122334455'),
-('Bob', 'Williams', 'bob.williams@email.com', '5566778899');
+INSERT INTO clients (first_name, last_name, email, phone_number, password) VALUES
+('Alice', 'Johnson', 'alice.johnson@email.com', '1122334455', 'password789'),
+('Bob', 'Williams', 'bob.williams@email.com', '5566778899', 'password012');
 
 -- Inserting sample data into `schedules` table using AM/PM time and day/month/year date format
 INSERT INTO schedules (trainer_id, client_id, session_date, start_time, end_time, location_id) VALUES

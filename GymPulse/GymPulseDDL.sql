@@ -4,9 +4,16 @@ USE gympulsedatabase;
 DROP TABLE IF EXISTS training_sessions;
 DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS schedules;
-DROP TABLE IF EXISTS locations;
-DROP TABLE IF EXISTS clients;
 DROP TABLE IF EXISTS trainers;
+DROP TABLE IF EXISTS clients;
+DROP TABLE IF EXISTS locations;
+
+-- locations table
+CREATE TABLE locations (
+    location_id INT AUTO_INCREMENT PRIMARY KEY,
+    gym_name VARCHAR(100) NOT NULL,
+    address VARCHAR(255) NOT NULL
+) ENGINE=InnoDB;
 
 -- trainers table
 CREATE TABLE trainers (
@@ -16,6 +23,8 @@ CREATE TABLE trainers (
     email VARCHAR(100) UNIQUE NOT NULL,
     phone_number CHAR(10),
     location_id INT,
+    password VARCHAR(255) NOT NULL, -- Added password column
+    FOREIGN KEY (location_id) REFERENCES locations(location_id), -- Foreign key relationship
     INDEX (location_id)
 ) ENGINE=InnoDB;
 
@@ -25,14 +34,8 @@ CREATE TABLE clients (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    phone_number CHAR(10)
-) ENGINE=InnoDB;
-
--- locations table
-CREATE TABLE locations (
-    location_id INT AUTO_INCREMENT PRIMARY KEY,
-    gym_name VARCHAR(100) NOT NULL,
-    address VARCHAR(255) NOT NULL
+    phone_number CHAR(10),
+    password VARCHAR(255) NOT NULL -- Added password column
 ) ENGINE=InnoDB;
 
 -- schedules table
