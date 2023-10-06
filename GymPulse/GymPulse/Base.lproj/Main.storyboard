@@ -12,7 +12,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SignUpViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="SignUpViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,12 +98,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-225.19083969465649" y="-65.492957746478879"/>
+            <point key="canvasLocation" x="-248" y="-80"/>
         </scene>
         <!--Client Sign Up Controller-->
         <scene sceneID="Ayq-oO-xy7">
             <objects>
-                <viewController id="HaQ-mJ-uDv" customClass="ClientSignUpController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="HaQ-mJ-uDv" customClass="ClientSignUpController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sLb-Bi-jGV">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -233,9 +233,9 @@
         <!--Contact-->
         <scene sceneID="YZH-Zq-kfn">
             <objects>
-                <viewController title="Contact" id="Hdg-BK-20r" sceneMemberID="viewController">
+                <viewController title="Contact" modalPresentationStyle="fullScreen" id="Hdg-BK-20r" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zgu-CU-WgC">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gym Address: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eis-CU-68R">
@@ -261,11 +261,11 @@
                                 </connections>
                             </textField>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVA-eT-buk">
-                                <rect key="frame" x="16" y="237" width="329" height="227"/>
+                                <rect key="frame" x="16" y="237" width="329" height="241"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLK-oB-cv1">
-                                <rect key="frame" x="16" y="472" width="135" height="21"/>
+                                <rect key="frame" x="16" y="486" width="135" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bgz-7i-cJc"/>
                                 </constraints>
@@ -283,7 +283,7 @@
                                 </constraints>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3d-c3-wpB">
-                                <rect key="frame" x="32" y="501" width="297" height="51"/>
+                                <rect key="frame" x="32" y="515" width="297" height="51"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="n91-aa-Se5"/>
@@ -337,9 +337,9 @@
         <!--Trainer Information-->
         <scene sceneID="c74-aZ-YDp">
             <objects>
-                <viewController title="Trainer Information" id="koN-YB-cDH" sceneMemberID="viewController">
+                <viewController title="Trainer Information" modalPresentationStyle="fullScreen" id="koN-YB-cDH" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LaI-uH-LjR">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="dOt-CW-Nbh"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -353,9 +353,9 @@
         <!--Profile-->
         <scene sceneID="NTE-c3-QgA">
             <objects>
-                <viewController title="Profile" id="FL0-Db-A50" sceneMemberID="viewController">
+                <viewController title="Profile" modalPresentationStyle="fullScreen" id="FL0-Db-A50" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eyk-2O-XgN">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TzD-5a-NTS">
@@ -474,6 +474,9 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="modal" modalPresentationStyle="fullScreen" id="5kq-IU-5fG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xke-GB-4m5">
                                 <rect key="frame" x="141" y="452" width="80" height="35"/>
@@ -537,9 +540,9 @@
         <!--Sessions-->
         <scene sceneID="tCC-by-Gbq">
             <objects>
-                <viewController title="Sessions" id="6b9-H0-d9c" sceneMemberID="viewController">
+                <viewController title="Sessions" modalPresentationStyle="fullScreen" id="6b9-H0-d9c" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dnc-Aa-6N2">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="HPK-Rl-yPL"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -553,9 +556,9 @@
         <!--Payments-->
         <scene sceneID="gYv-TW-df5">
             <objects>
-                <viewController title="Payments" id="fVG-Lr-cWt" sceneMemberID="viewController">
+                <viewController title="Payments" modalPresentationStyle="fullScreen" id="fVG-Lr-cWt" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DB4-9n-mmc">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="pdu-RV-waX"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -569,7 +572,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="XZU-La-TTJ">
             <objects>
-                <tabBarController id="Yda-io-7Cv" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="Yda-io-7Cv" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bGy-WA-84Z">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -590,7 +593,7 @@
         <!--Trainer Sign Up Controller-->
         <scene sceneID="cRI-2u-i43">
             <objects>
-                <viewController id="P0g-oi-o4H" customClass="TrainerSignUpController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="P0g-oi-o4H" customClass="TrainerSignUpController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VyI-ab-RFk">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -758,7 +761,7 @@
         <!--Log In View Controller-->
         <scene sceneID="VQB-AJ-DnY">
             <objects>
-                <viewController id="kzx-Cv-k9T" customClass="LogInViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="kzx-Cv-k9T" customClass="LogInViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wW1-i1-gMg">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -849,7 +852,7 @@
         <!--Client Log In Controller-->
         <scene sceneID="LIh-tp-Qan">
             <objects>
-                <viewController id="ZsV-2V-Uvf" customClass="ClientLogInController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="ZsV-2V-Uvf" customClass="ClientLogInController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hJf-hc-xQV">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -922,7 +925,7 @@
         <!--Trainer Log In Controller-->
         <scene sceneID="DHm-bD-wrq">
             <objects>
-                <viewController id="pPw-ed-rsG" customClass="TrainerLogInController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="pPw-ed-rsG" customClass="TrainerLogInController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nf9-He-RaC">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -995,7 +998,7 @@
         <!--Profile-->
         <scene sceneID="J2H-HD-6Pe">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nYh-jf-nju" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="nYh-jf-nju" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" selectedImage="person.crop.circle" catalog="system" id="LRG-H5-VG1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LL3-qU-QKm">
@@ -1014,7 +1017,7 @@
         <!--Contact-->
         <scene sceneID="9F1-xk-nVf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oEc-rh-xzA" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="oEc-rh-xzA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Contact" selectedImage="mail.stack" catalog="system" id="Yda-tz-t5a"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="anN-jT-vkH">
@@ -1033,7 +1036,7 @@
         <!--Sessions-->
         <scene sceneID="ni0-H7-yhL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pa6-qg-N2n" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Pa6-qg-N2n" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Sessions" selectedImage="calendar.circle" catalog="system" id="dJN-Um-lFT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uKf-6X-CUV">
@@ -1052,7 +1055,7 @@
         <!--Payments-->
         <scene sceneID="br9-wN-Bip">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fnD-vq-XxX" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="fnD-vq-XxX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Payments" selectedImage="dollarsign.circle" catalog="system" id="4nQ-1f-6eS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mg5-Q1-G2y">
@@ -1070,7 +1073,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1oq-ck-GC5"/>
+        <segue reference="wDO-hq-NF5"/>
+        <segue reference="YYh-Wz-R3I"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="calendar.circle" catalog="system" width="128" height="123"/>
