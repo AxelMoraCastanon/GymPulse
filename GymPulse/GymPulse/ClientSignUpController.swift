@@ -8,17 +8,9 @@ class ClientSignUpController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var phoneNumberTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
-    @IBOutlet weak var firstNameErrorLabel: UILabel!
-    @IBOutlet weak var lastNameErrorLabel: UILabel!
-    @IBOutlet weak var emailErrorLabel: UILabel!
-    @IBOutlet weak var phoneNumberErrorLabel: UILabel!
-    @IBOutlet weak var passwordErrorLabel: UILabel!
-    
     @IBOutlet weak var signUpButton: UIButton!
     
     let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
-    
-    let errorMessages = ["Required", "Invalid Email Address", "Password must be at least 8 characters", "Password must contain at least 1 digit", "Password must contain at least 1 lowercase character", "Password must contain at least 1 uppercase character"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,41 +28,15 @@ class ClientSignUpController: UIViewController, UITextViewDelegate {
     
     func resetForm() {
         let textFields = [firstNameTF, lastNameTF, emailTF, phoneNumberTF, passwordTF]
-        let errorLabels = [firstNameErrorLabel, lastNameErrorLabel, emailErrorLabel, phoneNumberErrorLabel, passwordErrorLabel]
         
         for textField in textFields {
             textField?.text = ""
         }
-        
-        for errorLabel in errorLabels {
-            errorLabel?.isHidden = false
-            errorLabel?.text = "Required"
-        }
-        
+                
         signUpButton.isEnabled = false
     }
     
     @IBAction func textFieldChanged(_ sender: UITextField) {
-        let fieldToErrorLabelMap: [UITextField: UILabel] = [
-            firstNameTF: firstNameErrorLabel,
-            lastNameTF: lastNameErrorLabel,
-            emailTF: emailErrorLabel,
-            phoneNumberTF: phoneNumberErrorLabel,
-            passwordTF: passwordErrorLabel
-        ]
-        
-        if let errorLabel = fieldToErrorLabelMap[sender] {
-            if sender == emailTF {
-                errorLabel.text = validateEmail(sender.text ?? "")
-            } else if sender == passwordTF {
-                errorLabel.text = validatePassword(sender.text ?? "")
-            } else {
-                errorLabel.isHidden = !(sender.text?.isEmpty ?? true)
-            }
-            
-            errorLabel.isHidden = (errorLabel.text == nil)
-        }
-        
         checkForValidForm()
     }
     
@@ -112,18 +78,18 @@ class ClientSignUpController: UIViewController, UITextViewDelegate {
         resetForm()
     }
     
-    func validateEmail(_ value: String) -> String? {
+    func validateEmail(_ value: String) -> Bool {
         let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
-        return predicate.evaluate(with: value) ? nil : "Invalid Email Address"
+        return predicate.evaluate(with: value)
     }
     
-    func validatePassword(_ value: String) -> String? {
-        if value.count < 8 { return "Password must be at least 8 characters" }
-        if !containsDigit(value) { return "Password must contain at least 1 digit" }
-        if !containsLowerCase(value) { return "Password must contain at least 1 lowercase character" }
-        if !containsUpperCase(value) { return "Password must contain at least 1 uppercase character" }
-        return nil
+    func validatePassword(_ value: String) -> Bool {
+        if value.count < 8 { return false }
+        if !containsDigit(value) { return false }
+        if !containsLowerCase(value) { return false }
+        if !containsUpperCase(value) { return false }
+        return true
     }
     
     func containsDigit(_ value: String) -> Bool {
@@ -140,7 +106,7 @@ class ClientSignUpController: UIViewController, UITextViewDelegate {
     
     func checkForValidForm() {
         let allFieldsFilled = [firstNameTF, lastNameTF, emailTF, phoneNumberTF, passwordTF].allSatisfy { $0?.text?.isEmpty == false }
-        if allFieldsFilled && emailErrorLabel.isHidden && passwordErrorLabel.isHidden {
+        if allFieldsFilled {
             signUpButton.isEnabled = true
         } else {
             signUpButton.isEnabled = false

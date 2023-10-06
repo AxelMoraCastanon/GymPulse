@@ -1,12 +1,9 @@
-// TrainerLogInController.swift
 import UIKit
 
 class TrainerLogInController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
-    @IBOutlet weak var emailErrorLabel: UILabel!
-    @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var logInButton: UIButton!
     
     let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
@@ -27,21 +24,10 @@ class TrainerLogInController: UIViewController, UITextViewDelegate {
     func resetForm() {
         emailTF.text = ""
         passwordTF.text = ""
-        emailErrorLabel.isHidden = true
-        passwordErrorLabel.isHidden = true
         logInButton.isEnabled = false
     }
     
     @IBAction func textFieldChanged(_ sender: UITextField) {
-        if sender == emailTF {
-            emailErrorLabel.text = validateEmail(sender.text ?? "")
-        } else if sender == passwordTF {
-            passwordErrorLabel.isHidden = sender.text?.isEmpty ?? true
-        }
-        
-        emailErrorLabel.isHidden = (emailErrorLabel.text == nil)
-        passwordErrorLabel.isHidden = (passwordErrorLabel.text == nil)
-        
         checkForValidForm()
     }
     
@@ -67,15 +53,15 @@ class TrainerLogInController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func validateEmail(_ value: String) -> String? {
+    func validateEmail(_ value: String) -> Bool {
         let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
-        return predicate.evaluate(with: value) ? nil : "Invalid Email Address"
+        return predicate.evaluate(with: value)
     }
     
     func checkForValidForm() {
         let allFieldsFilled = [emailTF, passwordTF].allSatisfy { $0?.text?.isEmpty == false }
-        if allFieldsFilled && emailErrorLabel.isHidden {
+        if allFieldsFilled && validateEmail(emailTF.text ?? "") {
             logInButton.isEnabled = true
         } else {
             logInButton.isEnabled = false
