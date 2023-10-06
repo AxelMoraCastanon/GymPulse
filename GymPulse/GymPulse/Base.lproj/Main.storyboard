@@ -392,7 +392,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Contact" id="V5p-cr-a2e"/>
                     <connections>
-                        <segue destination="koN-YB-cDH" kind="show" identifier="" id="Hwj-nD-QZh"/>
+                        <segue destination="koN-YB-cDH" kind="show" identifier="segueBlue" id="Hwj-nD-QZh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxW-gw-oDV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -643,7 +643,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="4m5-yO-8b2">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="jKm-2Q-TZi">
+                        <barButtonItem key="rightBarButtonItem" id="jKm-2Q-TZi">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="3vN-PW-xH4">
                                 <rect key="frame" x="255" y="4.6666666666666679" width="90" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
