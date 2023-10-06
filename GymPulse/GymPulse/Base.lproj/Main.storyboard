@@ -341,8 +341,92 @@
                     <view key="view" contentMode="scaleToFill" id="LaI-uH-LjR">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0eS-UH-0Cp">
+                                <rect key="frame" x="23" y="207" width="315" height="34"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="a4K-M6-mw9"/>
+                                    <constraint firstAttribute="width" constant="315" id="yp8-gD-0hC"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nud-t6-ljr">
+                                <rect key="frame" x="23" y="249" width="315" height="34"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="315" id="i3F-GN-GzB"/>
+                                    <constraint firstAttribute="height" constant="34" id="lNU-o8-9Ex"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hta-Rj-8hz">
+                                <rect key="frame" x="23" y="291" width="315" height="34"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="315" id="FuE-iT-rsO"/>
+                                    <constraint firstAttribute="height" constant="34" id="tb1-Xg-loQ"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Myl-Ft-6QG">
+                                <rect key="frame" x="23" y="165" width="315" height="34"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="DNl-E9-b5V"/>
+                                    <constraint firstAttribute="width" constant="315" id="oLd-l3-pZM"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dOt-CW-Nbh"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dOt-CW-Nbh" firstAttribute="trailing" secondItem="0eS-UH-0Cp" secondAttribute="trailing" constant="23" id="DWM-UK-tJN"/>
+                            <constraint firstItem="0eS-UH-0Cp" firstAttribute="top" secondItem="Myl-Ft-6QG" secondAttribute="bottom" constant="8" id="FpB-33-Nup"/>
+                            <constraint firstItem="Hta-Rj-8hz" firstAttribute="top" secondItem="Nud-t6-ljr" secondAttribute="bottom" constant="8" id="Gx5-Dg-Bj6"/>
+                            <constraint firstItem="dOt-CW-Nbh" firstAttribute="trailing" secondItem="Myl-Ft-6QG" secondAttribute="trailing" constant="23" id="IJX-mQ-efh"/>
+                            <constraint firstItem="Myl-Ft-6QG" firstAttribute="top" secondItem="dOt-CW-Nbh" secondAttribute="top" constant="121" id="J4r-r3-VCW"/>
+                            <constraint firstItem="0eS-UH-0Cp" firstAttribute="top" secondItem="Myl-Ft-6QG" secondAttribute="bottom" constant="8" id="PyK-Xn-jdZ"/>
+                            <constraint firstItem="Nud-t6-ljr" firstAttribute="top" secondItem="0eS-UH-0Cp" secondAttribute="bottom" constant="8" id="Yqs-Ir-ELm"/>
+                            <constraint firstItem="Nud-t6-ljr" firstAttribute="top" secondItem="0eS-UH-0Cp" secondAttribute="bottom" constant="8" id="ZUR-E0-q5Z"/>
+                            <constraint firstItem="Myl-Ft-6QG" firstAttribute="leading" secondItem="dOt-CW-Nbh" secondAttribute="leading" constant="23" id="cEA-iz-gd2"/>
+                            <constraint firstItem="Nud-t6-ljr" firstAttribute="leading" secondItem="dOt-CW-Nbh" secondAttribute="leading" constant="23" id="dL0-Z8-JuI"/>
+                            <constraint firstItem="dOt-CW-Nbh" firstAttribute="trailing" secondItem="Hta-Rj-8hz" secondAttribute="trailing" constant="23" id="kgt-jH-6oU"/>
+                            <constraint firstItem="dOt-CW-Nbh" firstAttribute="trailing" secondItem="Nud-t6-ljr" secondAttribute="trailing" constant="23" id="nBi-cY-y3j"/>
+                            <constraint firstItem="dOt-CW-Nbh" firstAttribute="bottom" secondItem="Hta-Rj-8hz" secondAttribute="bottom" constant="284.67000000000002" id="nDm-Oy-X0z"/>
+                            <constraint firstItem="0eS-UH-0Cp" firstAttribute="leading" secondItem="dOt-CW-Nbh" secondAttribute="leading" constant="23" id="nhN-wN-yPq"/>
+                            <constraint firstItem="Hta-Rj-8hz" firstAttribute="top" secondItem="Nud-t6-ljr" secondAttribute="bottom" constant="8" id="nvb-Pt-fz3"/>
+                            <constraint firstItem="Hta-Rj-8hz" firstAttribute="leading" secondItem="dOt-CW-Nbh" secondAttribute="leading" constant="23" id="xs6-Mf-vEY"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Trainer Information" id="6bZ-VT-hku"/>
                 </viewController>
