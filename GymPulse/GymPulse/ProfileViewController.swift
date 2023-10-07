@@ -142,7 +142,12 @@ class ProfileViewController: UIViewController {
     }
 
     func sendDataToAPI(endpoint: String, parameters: [String: Any], completion: @escaping (Bool) -> Void) {
-        let url = URL(string: baseURL + endpoint)!
+        guard let url = URL(string: baseURL + endpoint) else {
+            print("Error: Invalid URL")
+            completion(false)
+            return
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -156,12 +161,19 @@ class ProfileViewController: UIViewController {
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data, error == nil, let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let message = responseJSON["message"] as? String else {
+            guard let data = data, error == nil, let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                print("Error in network response:", error?.localizedDescription ?? "Unknown error")
                 completion(false)
                 return
             }
             
-            completion(message.contains("successfully"))
+            print("Server Response:", responseJSON)
+            
+            if let status = responseJSON["status"] as? String, status == "success" {
+                completion(true)
+            } else {
+                completion(false)
+            }
         }
         
         task.resume()

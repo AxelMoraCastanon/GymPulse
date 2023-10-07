@@ -1,4 +1,3 @@
-// update_client_password.php
 <?php
 include 'db_connection.php';
 
@@ -10,8 +9,13 @@ if(isset($data->client_id) && isset($data->password)){
     
     $stmt = $pdo->prepare("UPDATE clients SET password = ? WHERE client_id = ?");
     $stmt->execute([$hashedPassword, $data->client_id]);
-    echo json_encode(["message" => "Client password updated successfully"]);
+    
+    if ($stmt->rowCount() > 0) {
+        echo json_encode(["status" => "success", "message" => "Client password updated successfully"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "No changes made"]);
+    }
 } else {
-    echo json_encode(["message" => "Invalid input"]);
+    echo json_encode(["status" => "error", "message" => "Invalid input"]);
 }
 ?>
