@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		510919022AD0D72A003988A5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510919012AD0D72A003988A5 /* ProfileViewController.swift */; };
 		5173B9C82ACCFED500393541 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5173B9C72ACCFED500393541 /* SignUpViewController.swift */; };
 		51F521BA2AAC3094002F2AAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F521B92AAC3094002F2AAC /* AppDelegate.swift */; };
 		51F521BC2AAC3094002F2AAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F521BB2AAC3094002F2AAC /* SceneDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		510919012AD0D72A003988A5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5173B9C72ACCFED500393541 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		51F521B62AAC3094002F2AAC /* GymPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F521B92AAC3094002F2AAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				51FC64252ACD431600E3D442 /* LogInViewController.swift */,
 				51FC64272ACD440800E3D442 /* ClientLogInController.swift */,
 				51FC64292ACD441B00E3D442 /* TrainerLogInController.swift */,
+				510919012AD0D72A003988A5 /* ProfileViewController.swift */,
 			);
 			path = GymPulse;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			files = (
 				51FC642A2ACD441B00E3D442 /* TrainerLogInController.swift in Sources */,
 				51F521BE2AAC3094002F2AAC /* ViewController.swift in Sources */,
+				510919022AD0D72A003988A5 /* ProfileViewController.swift in Sources */,
 				51F521BA2AAC3094002F2AAC /* AppDelegate.swift in Sources */,
 				51FC64282ACD440800E3D442 /* ClientLogInController.swift in Sources */,
 				5173B9C82ACCFED500393541 /* SignUpViewController.swift in Sources */,

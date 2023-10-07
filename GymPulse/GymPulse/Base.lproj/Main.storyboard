@@ -437,7 +437,7 @@
         <!--Profile-->
         <scene sceneID="NTE-c3-QgA">
             <objects>
-                <viewController title="Profile" modalPresentationStyle="fullScreen" id="FL0-Db-A50" sceneMemberID="viewController">
+                <viewController title="Profile" modalPresentationStyle="fullScreen" id="FL0-Db-A50" customClass="ProfileViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eyk-2O-XgN">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
