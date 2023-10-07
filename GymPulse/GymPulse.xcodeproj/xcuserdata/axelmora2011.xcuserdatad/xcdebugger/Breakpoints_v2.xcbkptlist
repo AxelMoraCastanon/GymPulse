@@ -3,4 +3,114 @@
    uuid = "A30A9CB0-9136-4CE4-8AA9-19E914186AD8"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "434F1AC5-27DB-49CC-B8DD-50690B6C7CF6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GymPulse/TrainerSignUpController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "7"
+            endingLineNumber = "7"
+            landmarkName = "TrainerSignUpController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "434F1AC5-27DB-49CC-B8DD-50690B6C7CF6 - fc4cec91deab3517"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GymPulse.TrainerSignUpController.emailTF.getter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "GymPulse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelmora2011/Desktop/GymPulse/GymPulse/GymPulse/TrainerSignUpController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "434F1AC5-27DB-49CC-B8DD-50690B6C7CF6 - e4eafad1f181612b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GymPulse.TrainerSignUpController.emailTF.setter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "GymPulse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelmora2011/Desktop/GymPulse/GymPulse/GymPulse/TrainerSignUpController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "434F1AC5-27DB-49CC-B8DD-50690B6C7CF6 - 189f22e971f14733"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GymPulse.TrainerSignUpController.emailTF.modify : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "GymPulse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelmora2011/Desktop/GymPulse/GymPulse/GymPulse/TrainerSignUpController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "434F1AC5-27DB-49CC-B8DD-50690B6C7CF6 - 83c02c5863961cbc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GymPulse.TrainerSignUpController.emailTF.modify : Swift.Optional&lt;__C.UITextField&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "GymPulse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelmora2011/Desktop/GymPulse/GymPulse/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "434F1AC5-27DB-49CC-B8DD-50690B6C7CF6 - 8950fd10dc9f236"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GymPulse.TrainerSignUpController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; GymPulse.TrainerSignUpController"
+                  moduleName = "GymPulse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelmora2011/Desktop/GymPulse/GymPulse/GymPulse/TrainerSignUpController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "434F1AC5-27DB-49CC-B8DD-50690B6C7CF6 - c7c8522e81b21a56"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GymPulse.TrainerSignUpController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;GymPulse.TrainerSignUpController&gt;"
+                  moduleName = "GymPulse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelmora2011/Desktop/GymPulse/GymPulse/GymPulse/TrainerSignUpController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "184">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

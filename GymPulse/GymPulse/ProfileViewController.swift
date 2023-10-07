@@ -18,10 +18,22 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add tap gesture recognizer to dismiss keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
         setTextFieldEditableState(to: false)
         fetchAndDisplayUserDetails()
     }
 
+    // Method to hide keyboard
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+
+    
     @IBAction func updateButtonPressed(_ sender: UIButton) {
         setTextFieldEditableState(to: true)
         

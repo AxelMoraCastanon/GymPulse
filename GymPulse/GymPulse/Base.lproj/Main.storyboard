@@ -235,7 +235,7 @@
             <objects>
                 <viewController title="Contact" modalPresentationStyle="fullScreen" id="Hdg-BK-20r" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zgu-CU-WgC">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gym Address: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eis-CU-68R">
@@ -261,11 +261,11 @@
                                 </connections>
                             </textField>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVA-eT-buk">
-                                <rect key="frame" x="16" y="237" width="329" height="241"/>
+                                <rect key="frame" x="16" y="237" width="329" height="227"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLK-oB-cv1">
-                                <rect key="frame" x="16" y="486" width="135" height="21"/>
+                                <rect key="frame" x="16" y="472" width="135" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bgz-7i-cJc"/>
                                 </constraints>
@@ -283,7 +283,7 @@
                                 </constraints>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3d-c3-wpB">
-                                <rect key="frame" x="32" y="515" width="297" height="51"/>
+                                <rect key="frame" x="32" y="501" width="297" height="51"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="n91-aa-Se5"/>
@@ -339,7 +339,7 @@
             <objects>
                 <viewController title="Trainer Information" modalPresentationStyle="fullScreen" id="koN-YB-cDH" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LaI-uH-LjR">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0eS-UH-0Cp">
@@ -439,7 +439,7 @@
             <objects>
                 <viewController title="Profile" modalPresentationStyle="fullScreen" id="FL0-Db-A50" customClass="ProfileViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eyk-2O-XgN">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TzD-5a-NTS">
@@ -639,7 +639,7 @@
             <objects>
                 <viewController title="Sessions" modalPresentationStyle="fullScreen" id="6b9-H0-d9c" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dnc-Aa-6N2">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="HPK-Rl-yPL"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -655,7 +655,7 @@
             <objects>
                 <viewController title="Payments" modalPresentationStyle="fullScreen" id="fVG-Lr-cWt" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DB4-9n-mmc">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="644.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="pdu-RV-waX"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1170,7 +1170,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wDO-hq-NF5"/>
+        <segue reference="1oq-ck-GC5"/>
         <segue reference="YYh-Wz-R3I"/>
     </inferredMetricsTieBreakers>
     <resources>
