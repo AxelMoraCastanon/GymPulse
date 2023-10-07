@@ -564,7 +564,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xke-GB-4m5">
-                                <rect key="frame" x="141" y="452" width="80" height="35"/>
+                                <rect key="frame" x="141" y="452" width="80" height="34.333333333333314"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="P4n-a6-g3J"/>
                                     <constraint firstAttribute="height" constant="35" id="crM-Sf-Q2S"/>

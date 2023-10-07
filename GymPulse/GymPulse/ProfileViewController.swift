@@ -12,7 +12,9 @@ class ProfileViewController: UIViewController {
     
     let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
     var isClient: Bool = true
-    var userId: Int?
+    var clientId: Int?
+    var trainerId: Int?
+    var locationId: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +48,29 @@ class ProfileViewController: UIViewController {
     }
 
     func fetchAndDisplayUserDetails() {
-        guard let userId = userId else { return }
-        let endpoint = isClient ? "get_client_by_id.php?client_id=\(userId)" : "get_trainer_by_id.php?trainer_id=\(userId)"
-        fetchData(endpoint: endpoint) { userDetails in
-            self.firstNameTF.text = userDetails["first_name"] as? String
-            self.lastNameTF.text = userDetails["last_name"] as? String
-            self.emailTF.text = userDetails["email"] as? String
-            self.phoneNumberTF.text = userDetails["phone_number"] as? String
-            if !self.isClient, let locationId = userDetails["location_id"] as? Int {
-                self.fetchAndDisplayGymDetails(locationId: locationId)
+        if isClient, let clientId = clientId {
+            let endpoint = "get_client_by_id.php?client_id=\(clientId)"
+            fetchData(endpoint: endpoint) { userDetails in
+                self.firstNameTF.text = userDetails["first_name"] as? String
+                self.lastNameTF.text = userDetails["last_name"] as? String
+                self.emailTF.text = userDetails["email"] as? String
+                self.phoneNumberTF.text = userDetails["phone_number"] as? String
+                if let locationId = userDetails["location_id"] as? Int {
+                    self.locationId = locationId
+                    self.fetchAndDisplayGymDetails(locationId: locationId)
+                }
+            }
+        } else if let trainerId = trainerId {
+            let endpoint = "get_trainer_by_id.php?trainer_id=\(trainerId)"
+            fetchData(endpoint: endpoint) { userDetails in
+                self.firstNameTF.text = userDetails["first_name"] as? String
+                self.lastNameTF.text = userDetails["last_name"] as? String
+                self.emailTF.text = userDetails["email"] as? String
+                self.phoneNumberTF.text = userDetails["phone_number"] as? String
+                if let locationId = userDetails["location_id"] as? Int {
+                    self.locationId = locationId
+                    self.fetchAndDisplayGymDetails(locationId: locationId)
+                }
             }
         }
     }
@@ -68,11 +84,6 @@ class ProfileViewController: UIViewController {
     }
 
     func updateUserProfile() {
-        guard let userId = userId else {
-            print("User ID not found.")
-            return
-        }
-        
         var endpoint = ""
         var parameters: [String: Any] = [
             "first_name": firstNameTF.text ?? "",
@@ -81,19 +92,19 @@ class ProfileViewController: UIViewController {
             "phone_number": phoneNumberTF.text ?? ""
         ]
         
-        if isClient {
+        if isClient, let clientId = clientId {
             endpoint = "update_client.php"
-            parameters["client_id"] = userId
-        } else {
+            parameters["client_id"] = clientId
+        } else if let trainerId = trainerId {
             endpoint = "update_trainer.php"
-            parameters["trainer_id"] = userId
+            parameters["trainer_id"] = trainerId
         }
         
         sendDataToAPI(endpoint: endpoint, parameters: parameters) { success in
             if success {
                 print("Profile updated successfully.")
-                if !self.isClient {
-                    self.updateGymLocation()
+                if !self.isClient, let locationId = self.locationId {
+                    self.updateGymLocation(locationId: locationId)
                 }
             } else {
                 print("Failed to update profile.")
@@ -101,15 +112,10 @@ class ProfileViewController: UIViewController {
         }
     }
 
-    func updateGymLocation() {
-        guard let userId = userId else {
-            print("User ID not found.")
-            return
-        }
-        
+    func updateGymLocation(locationId: Int) {
         let endpoint = "update_location.php"
         let parameters: [String: Any] = [
-            "location_id": userId,
+            "location_id": locationId,
             "gym_name": gymNameTF.text ?? "",
             "address": gymAddressTF.text ?? ""
         ]
