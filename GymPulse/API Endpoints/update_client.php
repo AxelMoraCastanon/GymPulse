@@ -1,12 +1,42 @@
+//update_client.php
 <?php
 header('Content-Type: application/json');
 include 'db_connection.php';
 
 $data = json_decode(file_get_contents("php://input"));
 
-if(isset($data->client_id) && isset($data->first_name) && isset($data->last_name) && isset($data->email) && isset($data->phone_number)){
-    $stmt = $pdo->prepare("UPDATE clients SET first_name = ?, last_name = ?, email = ?, phone_number = ? WHERE client_id = ?");
-    $stmt->execute([$data->first_name, $data->last_name, $data->email, $data->phone_number, $data->client_id]);
+// Check if client_id is set
+if(isset($data->client_id)) {
+    $fieldsToUpdate = [
+        "first_name" => $data->first_name ?? null,
+        "last_name" => $data->last_name ?? null,
+        "email" => $data->email ?? null,
+        "phone_number" => $data->phone_number ?? null,
+        "password" => isset($data->password) ? password_hash($data->password, PASSWORD_DEFAULT) : null
+    ];
+
+    $updateFields = [];
+    $params = [];
+
+    // Loop through fields and build the query dynamically
+    foreach ($fieldsToUpdate as $field => $value) {
+        if (!is_null($value)) {
+            $updateFields[] = "$field = ?";
+            $params[] = $value;
+        }
+    }
+
+    // Check if any fields were provided for the update
+    if(empty($updateFields)) {
+        echo json_encode(["status" => "error", "message" => "No fields provided for update"]);
+        exit;
+    }
+
+    $query = "UPDATE clients SET " . implode(", ", $updateFields) . " WHERE client_id = ?";
+    $params[] = $data->client_id;
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
     
     if ($stmt->rowCount() > 0) {
         echo json_encode(["status" => "success", "message" => "Client details updated successfully"]);

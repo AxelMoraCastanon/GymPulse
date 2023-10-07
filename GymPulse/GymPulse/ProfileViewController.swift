@@ -104,6 +104,11 @@ class ProfileViewController: UIViewController {
             "phone_number": phoneNumberTF.text ?? ""
         ]
         
+        // Check if the password field is not empty and add it to the parameters
+        if let password = passwordTF.text, !password.isEmpty {
+            parameters["password"] = password
+        }
+        
         if isClient, let clientId = clientId {
             endpoint = "update_client.php"
             parameters["client_id"] = clientId
@@ -152,6 +157,9 @@ class ProfileViewController: UIViewController {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        // Print the parameters dictionary to verify the data being sent
+        print("Sending parameters to \(endpoint): \(parameters)")
+        
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch {
@@ -159,7 +167,7 @@ class ProfileViewController: UIViewController {
             completion(false)
             return
         }
-        
+
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             // Place the provided snippet here
             guard let data = data, error == nil, let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
