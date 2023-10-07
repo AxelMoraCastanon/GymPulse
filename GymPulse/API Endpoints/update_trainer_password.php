@@ -1,5 +1,6 @@
 // update_trainer_password.php
 <?php
+header('Content-Type: application/json');
 include 'db_connection.php';
 
 $data = json_decode(file_get_contents("php://input"));

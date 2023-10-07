@@ -161,8 +161,13 @@ class ProfileViewController: UIViewController {
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            // Place the provided snippet here
             guard let data = data, error == nil, let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                print("Error in network response:", error?.localizedDescription ?? "Unknown error")
+                if let error = error {
+                    print("Network error:", error.localizedDescription)
+                } else {
+                    print("Error parsing response or no data received.")
+                }
                 completion(false)
                 return
             }
