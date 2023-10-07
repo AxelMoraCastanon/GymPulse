@@ -559,6 +559,7 @@
                                     <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="logoutButtonPressed:" destination="FL0-Db-A50" eventType="touchUpInside" id="vwx-qy-Y8X"/>
                                     <segue destination="BYZ-38-t0r" kind="modal" modalPresentationStyle="fullScreen" id="5kq-IU-5fG"/>
                                 </connections>
                             </button>
@@ -573,6 +574,9 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="updateButtonPressed:" destination="FL0-Db-A50" eventType="touchUpInside" id="A4o-gN-9hk"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E2Y-uN-Lrn"/>
@@ -616,6 +620,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="4m5-yO-8b2"/>
+                    <connections>
+                        <outlet property="emailTF" destination="fPf-Vs-bqZ" id="eQO-Y0-PgV"/>
+                        <outlet property="firstNameTF" destination="NRZ-T8-8P5" id="pAI-z8-jwc"/>
+                        <outlet property="gymAddressTF" destination="wNc-t3-HJf" id="zky-al-8Bi"/>
+                        <outlet property="gymNameTF" destination="WBc-bX-Can" id="kSO-Rn-bA0"/>
+                        <outlet property="lastNameTF" destination="TzD-5a-NTS" id="dnT-f4-1hG"/>
+                        <outlet property="passwordTF" destination="VIX-ge-jAj" id="pNF-zY-AyG"/>
+                        <outlet property="phoneNumberTF" destination="94q-0Q-DTL" id="2LR-Qj-jii"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdt-Dp-FJ3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
