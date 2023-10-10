@@ -1,4 +1,3 @@
-// get_location_id.php
 <?php
 require 'db_connection.php';
 

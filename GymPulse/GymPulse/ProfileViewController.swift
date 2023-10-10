@@ -84,6 +84,8 @@ class ProfileViewController: UIViewController {
 
     
     @IBAction func verifyInfoButtonPressed(_ sender: UIButton) {
+        print("verifyInfoButtonPressed started") // Print statement added here
+
         if isClient {
             // Fetch client_id using get_client_id.php
             guard let email = emailTF.text, !email.isEmpty else {
@@ -138,6 +140,8 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
+        print("verifyInfoButtonPressed ended") // Print statement added here
+
     }
 
     func displayUpdateInformationAlert() {
@@ -362,9 +366,12 @@ class ProfileViewController: UIViewController {
     }
 
     func fetchData(endpoint: String, completion: @escaping ([String: Any]) -> Void) {
+        print("fetchData started with endpoint: \(endpoint)") // Print statement added here
+
         let url = URL(string: baseURL + endpoint)!
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil, let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                print("fetchData error or no data received for endpoint: \(endpoint)") // Print statement added here
                 return
             }
             
@@ -374,6 +381,8 @@ class ProfileViewController: UIViewController {
         }
         
         task.resume()
+
+        print("fetchData task resumed for endpoint: \(endpoint)") // Print statement added here
     }
 
     func displayError(message: String) {
