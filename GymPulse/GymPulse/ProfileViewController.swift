@@ -154,6 +154,15 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func updateButtonPressed(_ sender: UIButton) {
+        // Capture the text from the text fields on the main thread
+        let gymName = gymNameTF.text ?? ""
+        let gymAddress = gymAddressTF.text ?? ""
+        let firstName = firstNameTF.text ?? ""
+        let lastName = lastNameTF.text ?? ""
+        let email = emailTF.text ?? ""
+        let phoneNumber = phoneNumberTF.text ?? ""
+        let password = passwordTF.text ?? ""
+        
         if isClient {
             // Call update_client.php to update the client's information
             guard let clientId = clientId else {
@@ -164,11 +173,11 @@ class ProfileViewController: UIViewController {
             let endpoint = "update_client.php"
             let parameters: [String: Any] = [
                 "client_id": clientId,
-                "first_name": firstNameTF.text ?? "",
-                "last_name": lastNameTF.text ?? "",
-                "email": emailTF.text ?? "",
-                "phone_number": phoneNumberTF.text ?? "",
-                "password": passwordTF.text ?? ""
+                "first_name": firstName,
+                "last_name": lastName,
+                "email": email,
+                "phone_number": phoneNumber,
+                "password": password
             ]
             
             sendDataToAPI(endpoint: endpoint, parameters: parameters) { success in
@@ -188,12 +197,12 @@ class ProfileViewController: UIViewController {
             let trainerEndpoint = "update_trainer.php"
             let trainerParameters: [String: Any] = [
                 "trainer_id": trainerId,
-                "first_name": firstNameTF.text ?? "",
-                "last_name": lastNameTF.text ?? "",
-                "email": emailTF.text ?? "",
-                "phone_number": phoneNumberTF.text ?? "",
+                "first_name": firstName,
+                "last_name": lastName,
+                "email": email,
+                "phone_number": phoneNumber,
                 "location_id": locationId,
-                "password": passwordTF.text ?? ""
+                "password": password
             ]
             
             sendDataToAPI(endpoint: trainerEndpoint, parameters: trainerParameters) { success in
@@ -203,8 +212,8 @@ class ProfileViewController: UIViewController {
                     let locationEndpoint = "update_location.php"
                     let locationParameters: [String: Any] = [
                         "location_id": locationId,
-                        "gym_name": self.gymNameTF.text ?? "",
-                        "address": self.gymAddressTF.text ?? ""
+                        "gym_name": gymName,
+                        "address": gymAddress
                     ]
                     
                     self.sendDataToAPI(endpoint: locationEndpoint, parameters: locationParameters) { locationSuccess in
