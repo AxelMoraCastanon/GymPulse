@@ -233,7 +233,7 @@
         <!--Contact-->
         <scene sceneID="YZH-Zq-kfn">
             <objects>
-                <viewController title="Contact" modalPresentationStyle="fullScreen" id="Hdg-BK-20r" sceneMemberID="viewController">
+                <viewController title="Contact" modalPresentationStyle="fullScreen" id="Hdg-BK-20r" customClass="ContactViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zgu-CU-WgC">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -274,17 +274,18 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="viewTrainersPressed:" destination="Hdg-BK-20r" eventType="touchUpInside" id="ITc-Vm-EUK"/>
+                                </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-0T-5hZ">
                                 <rect key="frame" x="41" y="80" width="297" height="51"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="UCA-aa-zSB"/>
                                 </constraints>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3d-c3-wpB">
                                 <rect key="frame" x="32" y="515" width="297" height="51"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="n91-aa-Se5"/>
                                 </constraints>
@@ -299,6 +300,9 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="selectGymPressed:" destination="Hdg-BK-20r" eventType="touchUpInside" id="6Uv-WY-Lrq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5Fd-p8-Sou"/>
@@ -327,6 +331,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Contact" id="V5p-cr-a2e"/>
                     <connections>
+                        <outlet property="gymAddressLabel" destination="eis-CU-68R" id="uA3-fc-taD"/>
+                        <outlet property="gymAddressTextField" destination="dO4-G6-hhH" id="AWU-xF-ldE"/>
+                        <outlet property="gymPickerView" destination="6qG-0T-5hZ" id="ykz-ia-Vta"/>
+                        <outlet property="mapView" destination="MVA-eT-buk" id="vaR-le-fjw"/>
+                        <outlet property="selectGymButton" destination="jqf-FL-jWC" id="xHf-YA-c2H"/>
+                        <outlet property="trainerPickerView" destination="d3d-c3-wpB" id="3UF-QX-FbU"/>
+                        <outlet property="viewTrainersButton" destination="XLK-oB-cv1" id="0DG-Ur-GCH"/>
                         <segue destination="koN-YB-cDH" kind="show" identifier="trainerContactSegue" id="Hwj-nD-QZh"/>
                     </connections>
                 </viewController>
@@ -337,7 +348,7 @@
         <!--Trainer Information-->
         <scene sceneID="c74-aZ-YDp">
             <objects>
-                <viewController title="Trainer Information" modalPresentationStyle="fullScreen" id="koN-YB-cDH" sceneMemberID="viewController">
+                <viewController title="Trainer Information" modalPresentationStyle="fullScreen" id="koN-YB-cDH" customClass="trainerInformationController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LaI-uH-LjR">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -429,6 +440,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Trainer Information" id="6bZ-VT-hku"/>
+                    <connections>
+                        <outlet property="emailTF" destination="Nud-t6-ljr" id="hMD-5F-awh"/>
+                        <outlet property="firstNameTF" destination="Myl-Ft-6QG" id="xZt-Xc-e4X"/>
+                        <outlet property="lastNameTF" destination="0eS-UH-0Cp" id="M3D-Od-eJF"/>
+                        <outlet property="phoneNumberTF" destination="Hta-Rj-8hz" id="l6A-Wi-udy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ePh-Hl-Mco" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
