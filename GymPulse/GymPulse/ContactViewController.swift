@@ -1,16 +1,10 @@
-//
-//  ContactViewController.swift
-//  GymPulse
-//
-//  Created by Axel Mora on 10/9/23.
-//
-
 import UIKit
 import MapKit
 import CoreLocation
 
 class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    // MARK: - Outlets
     @IBOutlet weak var selectGymButton: UIButton!
     @IBOutlet weak var gymPickerView: UIPickerView!
     @IBOutlet weak var gymAddressLabel: UILabel!
@@ -19,24 +13,33 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var viewTrainersButton: UIButton!
     @IBOutlet weak var trainerPickerView: UIPickerView!
     
+    // MARK: - Constants
     private let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
     
+    // MARK: - Variables
     private var gyms: [String] = []
     private var selectedGymInfo: [String: Any] = [:]
     private var trainers: [[String: Any]] = []
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         fetchGymNames()
+        
+        // Add tap gesture recognizer to the map view
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(_:)))
+        mapView.addGestureRecognizer(tapGesture)
     }
-
+    
+    // MARK: - UI Setup
     private func setupUI() {
         gymPickerView.delegate = self
         gymPickerView.dataSource = self
         gymAddressTextField.isUserInteractionEnabled = false
     }
 
+    // MARK: - Actions
     @IBAction func selectGymPressed(_ sender: UIButton) {
         fetchGymNames()
     }
@@ -45,12 +48,11 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if let locationId = selectedGymInfo["location_id"] as? Int {
             fetchTrainers(by: locationId)
         } else {
-            showAlert(title: "Error", message: "Location ID not found.")
+            showAlert(title: "Error", message: "Unable to fetch trainers for the selected gym.")
         }
     }
 
     // MARK: - Networking
-
     private func fetchGymNames() {
         let url = URL(string: baseURL + "get_all_gym_names.php")!
         fetchData(from: url) { (data: [String]?) in
@@ -116,7 +118,6 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
 
     // MARK: - UI Helpers
-
     private func updateMapView(with address: String) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, error) in
@@ -145,8 +146,66 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.present(alert, animated: true, completion: nil)
     }
 
-    // MARK: - UIPickerView DataSource and Delegate
+    
+    // MARK: - Gesture Handlers
+    @objc func handleMapTap(_ gesture: UITapGestureRecognizer) {
+        let locationInView = gesture.location(in: mapView)
+        let tappedCoordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
+        
+        // Fetch more information about the tapped location
+        fetchInformation(for: tappedCoordinate)
+    }
 
+    func fetchInformation(for coordinate: CLLocationCoordinate2D) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) { (placemarks, error) in
+            if let error = error {
+                print("Error fetching location info: \(error.localizedDescription)")
+                return
+            }
+            
+            if let placemark = placemarks?.first {
+                var locationInfo = "Details about the location:\n"
+                
+                if let name = placemark.name {
+                    locationInfo += "Name: \(name)\n"
+                }
+                if let thoroughfare = placemark.thoroughfare {
+                    locationInfo += "Street: \(thoroughfare)\n"
+                }
+                if let locality = placemark.locality {
+                    locationInfo += "City: \(locality)\n"
+                }
+                if let administrativeArea = placemark.administrativeArea {
+                    locationInfo += "State: \(administrativeArea)\n"
+                }
+                if let postalCode = placemark.postalCode {
+                    locationInfo += "Postal Code: \(postalCode)\n"
+                }
+                if let country = placemark.country {
+                    locationInfo += "Country: \(country)\n"
+                }
+                
+                let alert = UIAlertController(title: "Location Info", message: locationInfo, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Get Directions", style: .default, handler: { _ in
+                    self.getDirections(to: coordinate)
+                }))
+                alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+
+    func getDirections(to coordinate: CLLocationCoordinate2D) {
+        let destinationPlacemark = MKPlacemark(coordinate: coordinate)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        destinationMapItem.name = "Selected Location"
+        destinationMapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+    }
+
+    
+    
+    // MARK: - UIPickerView DataSource and Delegate
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -170,7 +229,6 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             fetchGymInfo(by: selectedGym)
         } else {
             let selectedTrainer = trainers[row]
-            // Add code to handle trainer selection and perform segue
             performSegue(withIdentifier: "trainerContactSegue", sender: selectedTrainer)
         }
     }
