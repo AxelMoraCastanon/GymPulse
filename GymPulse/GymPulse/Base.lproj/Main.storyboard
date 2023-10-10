@@ -327,7 +327,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Contact" id="V5p-cr-a2e"/>
                     <connections>
-                        <segue destination="koN-YB-cDH" kind="show" identifier="segueBlue" id="Hwj-nD-QZh"/>
+                        <segue destination="koN-YB-cDH" kind="show" identifier="trainerContactSegue" id="Hwj-nD-QZh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxW-gw-oDV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
