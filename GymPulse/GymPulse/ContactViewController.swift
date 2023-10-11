@@ -3,7 +3,7 @@ import MapKit
 import CoreLocation
 
 class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var selectGymButton: UIButton!
     @IBOutlet weak var gymPickerView: UIPickerView!
@@ -20,7 +20,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     private var gyms: [String] = []
     private var selectedGymInfo: [String: Any] = [:]
     private var trainers: [[String: Any]] = []
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +36,16 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     private func setupUI() {
         gymPickerView.delegate = self
         gymPickerView.dataSource = self
+        trainerPickerView.delegate = self // Ensure trainerPickerView's delegate is set
+        trainerPickerView.dataSource = self // Ensure trainerPickerView's dataSource is set
         gymAddressTextField.isUserInteractionEnabled = false
     }
-
+    
     // MARK: - Actions
     @IBAction func selectGymPressed(_ sender: UIButton) {
         fetchGymNames()
     }
-
+    
     @IBAction func viewTrainersPressed(_ sender: UIButton) {
         if let locationId = selectedGymInfo["location_id"] as? Int {
             fetchTrainers(by: locationId)
@@ -51,7 +53,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             showAlert(title: "Error", message: "Unable to fetch trainers for the selected gym.")
         }
     }
-
+    
     // MARK: - Networking
     private func fetchGymNames() {
         let url = URL(string: baseURL + "get_all_gym_names.php")!
@@ -60,7 +62,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             self.gymPickerView.reloadAllComponents()
         }
     }
-
+    
     private func fetchGymInfo(by name: String) {
         let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let url = URL(string: baseURL + "get_gym_info_by_gym_name.php?gym_name=\(encodedName)")!
@@ -74,19 +76,25 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
     }
-
+    
     private func fetchTrainers(by locationId: Int) {
         let url = URL(string: baseURL + "get_trainer_by_location_id.php?location_id=\(locationId)")!
+        print("Fetching trainers with URL: \(url)") // Debugging statement
         fetchData(from: url) { (data: [[String: Any]]?) in
-            self.trainers = data ?? []
-            self.trainerPickerView.reloadAllComponents()
+            if let fetchedTrainers = data {
+                print("Fetched trainers: \(fetchedTrainers)") // Debugging statement
+                self.trainers = fetchedTrainers
+                self.trainerPickerView.reloadAllComponents()
+            } else {
+                print("Failed to fetch trainers or received empty data.") // Debugging statement
+            }
         }
     }
-
+    
     private func fetchData<T>(from url: URL, completion: @escaping (T?) -> Void) where T: Any {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                print("Error fetching data: \(error.localizedDescription)")
+                print("Error fetching data: \(error.localizedDescription)") // Debugging statement
                 DispatchQueue.main.async {
                     self.showAlert(title: "Error", message: "Failed to fetch data. Please try again.")
                 }
@@ -94,7 +102,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
             
             guard let data = data else {
-                print("No data received.")
+                print("No data received.") // Debugging statement
                 return
             }
             
@@ -112,11 +120,11 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     }
                 }
             } catch {
-                print("Error decoding JSON: \(error.localizedDescription)")
+                print("Error decoding JSON: \(error.localizedDescription)") // Debugging statement
             }
         }.resume()
     }
-
+    
     // MARK: - UI Helpers
     private func updateMapView(with address: String) {
         let geocoder = CLGeocoder()
@@ -139,13 +147,12 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
     }
-
+    
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
     
     // MARK: - Gesture Handlers
     @objc func handleMapTap(_ gesture: UITapGestureRecognizer) {
@@ -155,7 +162,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // Fetch more information about the tapped location
         fetchInformation(for: tappedCoordinate)
     }
-
+    
     func fetchInformation(for coordinate: CLLocationCoordinate2D) {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) { (placemarks, error) in
@@ -195,34 +202,62 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
     }
-
+    
     func getDirections(to coordinate: CLLocationCoordinate2D) {
         let destinationPlacemark = MKPlacemark(coordinate: coordinate)
         let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
         destinationMapItem.name = "Selected Location"
         destinationMapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
     }
-
-    
     
     // MARK: - UIPickerView DataSource and Delegate
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        print("numberOfComponents called for pickerView: \(pickerView)") // Debugging statement
         return 1
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        print("numberOfRowsInComponent called for pickerView: \(pickerView)") // Debugging statement
         return pickerView == gymPickerView ? gyms.count : trainers.count
     }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        print("attributedTitleForRow called for pickerView: \(pickerView) and row: \(row)") // Debugging statement
+        var title = ""
         if pickerView == gymPickerView {
-            return gyms[row]
+            title = gyms[row]
         } else {
             let trainer = trainers[row]
-            return "\(trainer["first_name"] ?? "") \(trainer["last_name"] ?? "")"
+            title = "\(trainer["first_name"] ?? "") \(trainer["last_name"] ?? "")"
         }
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .backgroundColor: UIColor.darkGray
+        ]
+        
+        return NSAttributedString(string: title, attributes: attributes)
     }
-
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = (view as? UILabel) ?? UILabel()
+        
+        var title = ""
+        if pickerView == gymPickerView {
+            title = gyms[row]
+        } else {
+            let trainer = trainers[row]
+            title = "\(trainer["first_name"] ?? "") \(trainer["last_name"] ?? "")"
+        }
+        
+        label.text = title
+        label.textAlignment = .center
+        label.backgroundColor = UIColor.darkGray
+        label.textColor = UIColor.white
+        
+        return label
+    }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == gymPickerView {
             let selectedGym = gyms[row]
@@ -232,7 +267,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             performSegue(withIdentifier: "trainerContactSegue", sender: selectedTrainer)
         }
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "trainerContactSegue", let destinationVC = segue.destination as? trainerInformationController, let trainerInfo = sender as? [String: Any] {
             destinationVC.trainerInfo = trainerInfo
