@@ -34,5 +34,8 @@
             </array>
         </dict>
     </dict>
+    <!-- Add this key for location permission -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location to show nearby gyms and trainers.</string>
 </dict>
 </plist>

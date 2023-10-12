@@ -260,26 +260,15 @@
                                     <action selector="textFieldChanged:" destination="HaQ-mJ-uDv" eventType="editingDidEnd" id="UXV-9D-mcx"/>
                                 </connections>
                             </textField>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVA-eT-buk">
-                                <rect key="frame" x="16" y="237" width="329" height="241"/>
-                                <standardMapConfiguration key="preferredConfiguration"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MVA-eT-buk">
+                                <rect key="frame" x="16" y="237" width="329" height="254"/>
+                                <standardMapConfiguration key="preferredConfiguration" showsTraffic="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLK-oB-cv1">
-                                <rect key="frame" x="16" y="486" width="135" height="34.333333333333371"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="View Trainers: ">
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="viewTrainersPressed:" destination="Hdg-BK-20r" eventType="touchUpInside" id="ITc-Vm-EUK"/>
-                                </connections>
-                            </button>
                             <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-0T-5hZ">
                                 <rect key="frame" x="32" y="86.333333333333329" width="297" height="71.999999999999986"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="71.999999999999986" id="0bu-N7-L4a"/>
+                                    <constraint firstAttribute="height" constant="71.999999999999986" id="WjT-Ch-dbg"/>
                                 </constraints>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqf-FL-jWC">
@@ -296,43 +285,50 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="St6-Uc-3Z8">
                                 <rect key="frame" x="16" y="528" width="329" height="82"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="82" id="iMH-Om-yl2"/>
+                                    <constraint firstAttribute="height" constant="82" id="chG-A3-rb1"/>
                                 </constraints>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Trainers: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOl-BN-8pW">
+                                <rect key="frame" x="16" y="499" width="112" height="21"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5Fd-p8-Sou"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6qG-0T-5hZ" firstAttribute="centerX" secondItem="MVA-eT-buk" secondAttribute="centerX" id="3yO-UK-GwA"/>
-                            <constraint firstItem="MVA-eT-buk" firstAttribute="top" secondItem="dO4-G6-hhH" secondAttribute="bottom" constant="8" id="5gO-xh-bfg"/>
-                            <constraint firstItem="eis-CU-68R" firstAttribute="leading" secondItem="dO4-G6-hhH" secondAttribute="leading" id="8NJ-Rm-cEb"/>
-                            <constraint firstItem="St6-Uc-3Z8" firstAttribute="top" secondItem="XLK-oB-cv1" secondAttribute="bottom" constant="7.6666666666666288" id="IMV-US-Ozx"/>
-                            <constraint firstItem="5Fd-p8-Sou" firstAttribute="trailing" secondItem="dO4-G6-hhH" secondAttribute="trailing" constant="31" id="IUT-xk-gmO"/>
-                            <constraint firstItem="MVA-eT-buk" firstAttribute="leading" secondItem="XLK-oB-cv1" secondAttribute="leading" id="Lpg-RV-XE7"/>
-                            <constraint firstItem="MVA-eT-buk" firstAttribute="trailing" secondItem="zgu-CU-WgC" secondAttribute="trailingMargin" id="O7p-B2-fNr"/>
-                            <constraint firstItem="jqf-FL-jWC" firstAttribute="top" secondItem="5Fd-p8-Sou" secondAttribute="top" id="T4v-GO-Ktw"/>
-                            <constraint firstItem="jqf-FL-jWC" firstAttribute="leading" secondItem="zgu-CU-WgC" secondAttribute="leadingMargin" id="Vnx-LR-DSQ"/>
-                            <constraint firstItem="6qG-0T-5hZ" firstAttribute="leading" secondItem="5Fd-p8-Sou" secondAttribute="leading" constant="32" id="W4d-Y5-GB8"/>
-                            <constraint firstItem="MVA-eT-buk" firstAttribute="trailing" secondItem="St6-Uc-3Z8" secondAttribute="trailing" id="dg6-ve-31o"/>
-                            <constraint firstItem="dO4-G6-hhH" firstAttribute="top" secondItem="eis-CU-68R" secondAttribute="bottom" constant="7.6666666666666572" id="fH9-35-B1h"/>
-                            <constraint firstItem="jqf-FL-jWC" firstAttribute="leading" secondItem="eis-CU-68R" secondAttribute="leading" id="hXy-0K-Fhg"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="St6-Uc-3Z8" secondAttribute="bottom" constant="-0.33333333333337123" id="iSD-18-h7G"/>
-                            <constraint firstItem="dO4-G6-hhH" firstAttribute="leading" secondItem="MVA-eT-buk" secondAttribute="leading" id="mPA-Rd-07L"/>
-                            <constraint firstItem="XLK-oB-cv1" firstAttribute="leading" secondItem="St6-Uc-3Z8" secondAttribute="leading" id="mc4-d9-hmx"/>
-                            <constraint firstItem="eis-CU-68R" firstAttribute="top" secondItem="6qG-0T-5hZ" secondAttribute="bottom" constant="8.0000000000000284" id="qpd-hH-tVr"/>
-                            <constraint firstItem="XLK-oB-cv1" firstAttribute="top" secondItem="MVA-eT-buk" secondAttribute="bottom" constant="8" id="slI-07-92M"/>
-                            <constraint firstItem="6qG-0T-5hZ" firstAttribute="top" secondItem="jqf-FL-jWC" secondAttribute="bottom" constant="7.9999999999999716" id="xar-TQ-OFb"/>
+                            <constraint firstItem="MVA-eT-buk" firstAttribute="leading" secondItem="KOl-BN-8pW" secondAttribute="leading" id="38g-vy-iBr"/>
+                            <constraint firstItem="St6-Uc-3Z8" firstAttribute="top" secondItem="KOl-BN-8pW" secondAttribute="bottom" constant="8" id="AeV-om-Hlp"/>
+                            <constraint firstItem="jqf-FL-jWC" firstAttribute="leading" secondItem="eis-CU-68R" secondAttribute="leading" id="ArT-Tv-U1J"/>
+                            <constraint firstItem="MVA-eT-buk" firstAttribute="top" secondItem="dO4-G6-hhH" secondAttribute="bottom" constant="8" id="C58-e8-11K"/>
+                            <constraint firstItem="MVA-eT-buk" firstAttribute="trailing" secondItem="zgu-CU-WgC" secondAttribute="trailingMargin" id="K7o-uP-BCL"/>
+                            <constraint firstItem="KOl-BN-8pW" firstAttribute="top" secondItem="MVA-eT-buk" secondAttribute="bottom" constant="8" id="MOe-Fn-WFi"/>
+                            <constraint firstItem="jqf-FL-jWC" firstAttribute="leading" secondItem="zgu-CU-WgC" secondAttribute="leadingMargin" id="MjB-Pt-Llp"/>
+                            <constraint firstItem="jqf-FL-jWC" firstAttribute="top" secondItem="5Fd-p8-Sou" secondAttribute="top" id="Od9-Xm-umT"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="St6-Uc-3Z8" secondAttribute="bottom" constant="-0.33333333333337123" id="OkZ-9D-o0w"/>
+                            <constraint firstItem="6qG-0T-5hZ" firstAttribute="leading" secondItem="5Fd-p8-Sou" secondAttribute="leading" constant="32" id="UCl-jZ-32P"/>
+                            <constraint firstItem="6qG-0T-5hZ" firstAttribute="top" secondItem="jqf-FL-jWC" secondAttribute="bottom" constant="7.9999999999999716" id="Z37-tb-GUJ"/>
+                            <constraint firstItem="5Fd-p8-Sou" firstAttribute="trailing" secondItem="dO4-G6-hhH" secondAttribute="trailing" constant="31" id="aOs-qb-QeZ"/>
+                            <constraint firstItem="eis-CU-68R" firstAttribute="leading" secondItem="dO4-G6-hhH" secondAttribute="leading" id="b38-hh-Ui8"/>
+                            <constraint firstItem="dO4-G6-hhH" firstAttribute="top" secondItem="eis-CU-68R" secondAttribute="bottom" constant="7.6666666666666572" id="ccs-pL-7Gq"/>
+                            <constraint firstItem="dO4-G6-hhH" firstAttribute="leading" secondItem="MVA-eT-buk" secondAttribute="leading" id="fAP-lN-kSo"/>
+                            <constraint firstItem="KOl-BN-8pW" firstAttribute="leading" secondItem="St6-Uc-3Z8" secondAttribute="leading" id="lm7-GO-eat"/>
+                            <constraint firstItem="6qG-0T-5hZ" firstAttribute="centerX" secondItem="MVA-eT-buk" secondAttribute="centerX" id="oNr-hy-yit"/>
+                            <constraint firstItem="MVA-eT-buk" firstAttribute="trailing" secondItem="St6-Uc-3Z8" secondAttribute="trailing" id="tww-Hz-AkG"/>
+                            <constraint firstItem="eis-CU-68R" firstAttribute="top" secondItem="6qG-0T-5hZ" secondAttribute="bottom" constant="8.0000000000000284" id="w8R-7z-Wm9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Contact" id="V5p-cr-a2e"/>
                     <connections>
+                        <outlet property="availableTrainersLabel" destination="KOl-BN-8pW" id="v5z-fG-SNP"/>
                         <outlet property="gymAddressLabel" destination="eis-CU-68R" id="uA3-fc-taD"/>
                         <outlet property="gymAddressTextField" destination="dO4-G6-hhH" id="AWU-xF-ldE"/>
                         <outlet property="gymPickerView" destination="6qG-0T-5hZ" id="ykz-ia-Vta"/>
                         <outlet property="mapView" destination="MVA-eT-buk" id="vaR-le-fjw"/>
                         <outlet property="selectGymButton" destination="jqf-FL-jWC" id="xHf-YA-c2H"/>
                         <outlet property="trainerPickerView" destination="St6-Uc-3Z8" id="Vyy-90-45x"/>
-                        <outlet property="viewTrainersButton" destination="XLK-oB-cv1" id="0DG-Ur-GCH"/>
                         <segue destination="koN-YB-cDH" kind="show" identifier="trainerContactSegue" id="Hwj-nD-QZh"/>
                     </connections>
                 </viewController>
