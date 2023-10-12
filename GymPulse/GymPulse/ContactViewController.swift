@@ -3,7 +3,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
+class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, MKMapViewDelegate {
     
     // MARK: - Outlets
     @IBOutlet weak var selectGymButton: UIButton!
@@ -38,6 +38,8 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
+        mapView.delegate = self
         
         setupUI()
         fetchGymNames()
@@ -206,6 +208,13 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             self.present(actionSheet, animated: true, completion: nil)
         }
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let coordinate = view.annotation?.coordinate {
+            fetchInformation(for: coordinate)
+        }
+    }
+
     
     private func formatStreetAddressAndCity(from placemark: CLPlacemark) -> String {
         var addressString = ""
