@@ -12,7 +12,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var availableTrainersLabel: UILabel!
     @IBOutlet weak var trainerPickerView: UIPickerView!
     
-    private let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
+    let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
     private var gyms: [String] = []
     private var selectedGymInfo: [String: Any] = [:]
     private var trainers: [[String: Any]] = []
@@ -66,6 +66,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     private func fetchTrainers(by locationId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: baseURL + "get_trainer_by_location_id.php?location_id=\(locationId)")!
+        
         fetchData(from: url) { (data: [[String: Any]]?) in
             if let fetchedTrainers = data, !fetchedTrainers.isEmpty {
                 self.trainers = fetchedTrainers
@@ -76,7 +77,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
     }
-    
+
     private func fetchGymNames() {
         let url = URL(string: baseURL + "get_all_gym_names.php")!
         fetchData(from: url) { (data: [String]?) in
@@ -88,7 +89,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
     }
-    
+
     private func fetchGymInfo(by name: String) {
         let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let url = URL(string: baseURL + "get_gym_info_by_gym_name.php?gym_name=\(encodedName)")!
@@ -105,7 +106,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
     }
-    
+
     private func fetchTrainers(by locationId: Int) {
         let url = URL(string: baseURL + "get_trainer_by_location_id.php?location_id=\(locationId)")!
         fetchData(from: url) { (data: [[String: Any]]?) in

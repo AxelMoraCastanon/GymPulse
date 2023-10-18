@@ -9,8 +9,8 @@ class ClientSignUpController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     
-    let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
-    
+    let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +50,12 @@ class ClientSignUpController: UIViewController, UITextViewDelegate {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: clientData)
         
-        let url = URL(string: baseURL + "add_client.php")!
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
+        let url = URL(string: unwrappedBaseURL + "add_client.php")!
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = jsonData

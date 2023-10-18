@@ -6,8 +6,8 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     private var calendarView: DayView!
     private var sessions: [Event] = []
     private var fetchedSchedules: [[String: Any]] = []
-    private let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
-    
+    let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -55,8 +55,12 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     }
 
     func fetchID(email: String, isClient: Bool) {
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
         let endpoint = isClient ? "get_client_id.php" : "get_trainer_id.php"
-        guard let url = URL(string: baseURL + endpoint + "?email=\(email)") else { return }
+        guard let url = URL(string: unwrappedBaseURL + endpoint + "?email=\(email)") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
@@ -72,8 +76,12 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     }
 
     func fetchScheduleID(id: String, isClient: Bool) {
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
         let endpoint = "get_schedules_by_id.php"
-        guard let url = URL(string: baseURL + endpoint + "?\(isClient ? "client_id" : "trainer_id")=\(id)") else { return }
+        guard let url = URL(string: unwrappedBaseURL + endpoint + "?\(isClient ? "client_id" : "trainer_id")=\(id)") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
@@ -93,7 +101,11 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     }
 
     func fetchSessions(scheduleID: String) {
-        guard let url = URL(string: baseURL + "get_sessions_by_id.php?schedule_id=\(scheduleID)") else { return }
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
+        guard let url = URL(string: unwrappedBaseURL + "get_sessions_by_id.php?schedule_id=\(scheduleID)") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }

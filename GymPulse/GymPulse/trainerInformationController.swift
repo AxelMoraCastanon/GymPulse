@@ -7,8 +7,8 @@ class trainerInformationController: UIViewController {
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var phoneNumberTF: UITextField!
     
-    private let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
-    
+    let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
+
     var trainerInfo: [String: Any] = [:]
 
     override func viewDidLoad() {

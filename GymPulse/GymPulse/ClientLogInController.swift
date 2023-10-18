@@ -6,8 +6,8 @@ class ClientLogInController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var logInButton: UIButton!
     
-    let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
-    
+    let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,7 +71,13 @@ class ClientLogInController: UIViewController, UITextViewDelegate {
             return
         }
         
-        let url = URL(string: baseURL + endpoint)!
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
+        
+        let url = URL(string: unwrappedBaseURL + endpoint)!
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = jsonData

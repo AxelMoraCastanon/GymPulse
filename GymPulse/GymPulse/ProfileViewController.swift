@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var verifyInfoButton: UIButton!
     @IBOutlet weak var updateButton: UIButton!
     
-    let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
+    let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
     var isClient: Bool = true
     var clientId: Int?
     var trainerId: Int?
@@ -310,12 +310,14 @@ class ProfileViewController: UIViewController {
     }
 
     func sendDataToAPI(endpoint: String, parameters: [String: Any], completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: baseURL + endpoint) else {
-            print("Error: Invalid URL")
+        
+        guard let unwrappedBaseURL = baseURL,
+              let url = URL(string: unwrappedBaseURL + endpoint) else {
+            print("Error: Invalid URL or baseURL not found")
             completion(false)
             return
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -356,7 +358,13 @@ class ProfileViewController: UIViewController {
     func fetchData(endpoint: String, completion: @escaping ([String: Any]) -> Void) {
         print("fetchData started with endpoint: \(endpoint)")
 
-        let url = URL(string: baseURL + endpoint)!
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
+        
+        let url = URL(string: unwrappedBaseURL + endpoint)!
+
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil, let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                 print("fetchData error or no data received for endpoint: \(endpoint)")

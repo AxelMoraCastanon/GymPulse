@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  GymPulse
+//
+//  Created by Axel Mora on 10/17/23.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BASE_URL = http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/

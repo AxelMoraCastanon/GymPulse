@@ -11,6 +11,8 @@ class TrainerSignUpController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     
+    let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,7 +98,13 @@ class TrainerSignUpController: UIViewController, UITextViewDelegate {
             return
         }
         
-        let url = URL(string: "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/\(endpoint)")!
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
+        
+        let url = URL(string: unwrappedBaseURL + endpoint)!
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = jsonData
