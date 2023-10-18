@@ -65,8 +65,12 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     private func fetchTrainers(by locationId: Int, completion: @escaping (Bool) -> Void) {
-        let url = URL(string: baseURL + "get_trainer_by_location_id.php?location_id=\(locationId)")!
-        
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
+        let url = URL(string: unwrappedBaseURL + "get_trainer_by_location_id.php?location_id=\(locationId)")!
+
         fetchData(from: url) { (data: [[String: Any]]?) in
             if let fetchedTrainers = data, !fetchedTrainers.isEmpty {
                 self.trainers = fetchedTrainers
@@ -79,7 +83,11 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
 
     private func fetchGymNames() {
-        let url = URL(string: baseURL + "get_all_gym_names.php")!
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
+        let url = URL(string: unwrappedBaseURL + "get_all_gym_names.php")!
         fetchData(from: url) { (data: [String]?) in
             self.gyms = data ?? []
             self.gymPickerView.reloadAllComponents()
@@ -91,8 +99,12 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
 
     private func fetchGymInfo(by name: String) {
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
         let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let url = URL(string: baseURL + "get_gym_info_by_gym_name.php?gym_name=\(encodedName)")!
+        let url = URL(string: unwrappedBaseURL + "get_gym_info_by_gym_name.php?gym_name=\(encodedName)")!
         fetchData(from: url) { (data: [String: Any]?) in
             if let gymInfo = data {
                 self.selectedGymInfo = gymInfo
@@ -108,7 +120,11 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
 
     private func fetchTrainers(by locationId: Int) {
-        let url = URL(string: baseURL + "get_trainer_by_location_id.php?location_id=\(locationId)")!
+        guard let unwrappedBaseURL = baseURL else {
+            print("Error fetching baseURL")
+            return
+        }
+        let url = URL(string: unwrappedBaseURL + "get_trainer_by_location_id.php?location_id=\(locationId)")!
         fetchData(from: url) { (data: [[String: Any]]?) in
             if let fetchedTrainers = data {
                 self.trainers = fetchedTrainers
