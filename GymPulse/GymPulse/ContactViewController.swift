@@ -12,7 +12,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var availableTrainersLabel: UILabel!
     @IBOutlet weak var trainerPickerView: UIPickerView!
     
-    let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
+    let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
     private var gyms: [String] = []
     private var selectedGymInfo: [String: Any] = [:]
     private var trainers: [[String: Any]] = []

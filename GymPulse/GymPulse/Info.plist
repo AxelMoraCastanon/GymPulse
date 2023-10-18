@@ -37,5 +37,8 @@
     <!-- Add this key for location permission -->
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>We need your location to show nearby gyms and trainers.</string>
+    <!-- Added BASE_URL key -->
+    <key>BASE_URL</key>
+    <string>http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/</string>
 </dict>
 </plist>

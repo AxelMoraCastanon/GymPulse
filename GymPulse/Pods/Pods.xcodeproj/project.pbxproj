@@ -170,7 +170,7 @@
 		AE3A8C45F171A6ED1E8828977F3E6391 /* pl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pl.lproj; path = Sources/Localizations/pl.lproj; sourceTree = "<group>"; };
 		B05CD77608415D5A08BC9B6D5421ED7D /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ja.lproj; path = Sources/Localizations/ja.lproj; sourceTree = "<group>"; };
 		B0CCB3144082C887EC59E2B48788042B /* sk.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = sk.lproj; path = Sources/Localizations/sk.lproj; sourceTree = "<group>"; };
-		B2E7E5C65F691DFF3916D530D3F092D1 /* Pods-GymPulse */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-GymPulse"; path = Pods_GymPulse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2E7E5C65F691DFF3916D530D3F092D1 /* Pods_GymPulse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymPulse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38DDC677355717F9DA041342D01418E /* DayViewState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DayViewState.swift; path = Sources/DayViewState.swift; sourceTree = "<group>"; };
 		B4EED4FADF6881235421878ED0443258 /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Sources/Timeline/Event.swift; sourceTree = "<group>"; };
 		B523FDD9CAD1A095BE14B42998A04BA5 /* hr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = hr.lproj; path = Sources/Localizations/hr.lproj; sourceTree = "<group>"; };
@@ -410,7 +410,7 @@
 			children = (
 				6F7D47B3E239EA3D8D10DEB990A39B29 /* CalendarKit.framework */,
 				A828DFCF7CF3511DA7A8E0C6889A3180 /* CalendarKit.bundle */,
-				B2E7E5C65F691DFF3916D530D3F092D1 /* Pods-GymPulse */,
+				B2E7E5C65F691DFF3916D530D3F092D1 /* Pods_GymPulse.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 			);
 			name = "Pods-GymPulse";
 			productName = Pods_GymPulse;
-			productReference = B2E7E5C65F691DFF3916D530D3F092D1 /* Pods-GymPulse */;
+			productReference = B2E7E5C65F691DFF3916D530D3F092D1 /* Pods_GymPulse.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */

@@ -12,7 +12,7 @@ class TrainerSignUpController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var signUpButton: UIButton!
     
     let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
