@@ -1,11 +1,9 @@
-//ContactViewController.swift
 import UIKit
 import MapKit
 import CoreLocation
 
 class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    // MARK: - Outlets
     @IBOutlet weak var selectGymButton: UIButton!
     @IBOutlet weak var gymPickerView: UIPickerView!
     @IBOutlet weak var gymAddressLabel: UILabel!
@@ -14,27 +12,18 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var availableTrainersLabel: UILabel!
     @IBOutlet weak var trainerPickerView: UIPickerView!
     
-    // MARK: - Constants
     private let baseURL = "http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/"
-    
-    // MARK: - Variables
     private var gyms: [String] = []
     private var selectedGymInfo: [String: Any] = [:]
     private var trainers: [[String: Any]] = []
-    
-    // MARK: - Properties
     private var userCurrentLocation: CLLocation?
-    
-    // MARK: - UI Helpers
     private var locationManager = CLLocationManager()
     private let searchRadius: CLLocationDistance = 500
-    private let proximityRadius: CLLocationDistance = 32186.9 // 20 miles in meters
-    
-    // MARK: - Lifecycle
+    private let proximityRadius: CLLocationDistance = 32186.9
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configure the location manager
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -44,25 +33,21 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         setupUI()
         fetchGymNames()
         
-        // Add tap gesture recognizer to the map view
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(_:)))
         mapView.addGestureRecognizer(tapGesture)
         
         let appleMapsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleAppleMapsTap(_:)))
         mapView.addGestureRecognizer(appleMapsTapGesture)
-        
     }
     
-    // MARK: - UI Setup
     private func setupUI() {
         gymPickerView.delegate = self
         gymPickerView.dataSource = self
-        trainerPickerView.delegate = self // Ensure trainerPickerView's delegate is set
-        trainerPickerView.dataSource = self // Ensure trainerPickerView's dataSource is set
+        trainerPickerView.delegate = self
+        trainerPickerView.dataSource = self
         gymAddressTextField.isUserInteractionEnabled = false
     }
     
-    // MARK: - Actions
     @IBAction func selectGymPressed(_ sender: UIButton) {
         fetchGymNames()
     }
@@ -81,28 +66,23 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     private func fetchTrainers(by locationId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: baseURL + "get_trainer_by_location_id.php?location_id=\(locationId)")!
-        print("Fetching trainers with URL: \(url)") // Debugging statement
         fetchData(from: url) { (data: [[String: Any]]?) in
             if let fetchedTrainers = data, !fetchedTrainers.isEmpty {
-                print("Fetched trainers: \(fetchedTrainers)") // Debugging statement
                 self.trainers = fetchedTrainers
                 self.trainerPickerView.reloadAllComponents()
                 completion(true)
             } else {
-                print("Failed to fetch trainers or received empty data.") // Debugging statement
                 completion(false)
             }
         }
     }
     
-    // MARK: - Networking
     private func fetchGymNames() {
         let url = URL(string: baseURL + "get_all_gym_names.php")!
         fetchData(from: url) { (data: [String]?) in
             self.gyms = data ?? []
             self.gymPickerView.reloadAllComponents()
             
-            // Fetch the gym info for the first gym in the list
             if let firstGym = self.gyms.first {
                 self.fetchGymInfo(by: firstGym)
             }
@@ -142,7 +122,6 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     private func fetchData<T>(from url: URL, completion: @escaping (T?) -> Void) where T: Any {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                print("Error fetching data: \(error.localizedDescription)") // Debugging statement
                 DispatchQueue.main.async {
                     self.showAlert(title: "Error", message: "Failed to fetch data. Please try again.")
                 }
@@ -150,7 +129,6 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
             
             guard let data = data else {
-                print("No data received.") // Debugging statement
                 return
             }
             
@@ -168,30 +146,24 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     }
                 }
             } catch {
-                print("Error decoding JSON: \(error.localizedDescription)") // Debugging statement
             }
         }.resume()
     }
     
-    // MARK: - UI Helpers
     private func updateMapView(with address: String) {
         let gymName = selectedGymInfo["gym_name"] as? String ?? ""
         
-        // Start by searching using only the gym name
         searchInMaps(using: gymName) { (results) in
             if results.isEmpty {
-                // Handle the case where no results are found
                 self.showAlert(title: "Error", message: "Unable to find the location.")
                 return
             }
             
-            // If there's only one result, display it directly
             if results.count == 1, let firstResult = results.first {
                 self.displayLocation(location: firstResult.placemark.location!, title: gymName, subtitle: address)
                 return
             }
             
-            // Present the user with a list of results to choose from
             let actionSheet = UIAlertController(title: "Select a Location", message: "Multiple locations found. Please select the correct one.", preferredStyle: .actionSheet)
             
             for result in results {
@@ -233,12 +205,6 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let search = MKLocalSearch(request: searchRequest)
         
         search.start { (response, error) in
-            if let error = error {
-                print("Error searching in maps: \(error.localizedDescription)")
-                completion([])
-                return
-            }
-            
             if let results = response?.mapItems {
                 completion(results)
             } else {
@@ -246,8 +212,6 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
     }
-    
-    // ... [Rest of the code remains unchanged]
     
     private func isAddressMatching(placemark: CLPlacemark?, address: String) -> Bool {
         if let placemark = placemark {
@@ -265,7 +229,6 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: searchRadius, longitudinalMeters: searchRadius)
         self.mapView.setRegion(region, animated: true)
         
-        // Add a pin to the map
         let annotation = MKPointAnnotation()
         annotation.coordinate = location.coordinate
         annotation.title = title
@@ -279,23 +242,19 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - Gesture Handlers
     @objc func handleMapTap(_ gesture: UITapGestureRecognizer) {
         let locationInView = gesture.location(in: mapView)
         let tappedCoordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
         
-        // Fetch more information about the tapped location
         fetchInformation(for: tappedCoordinate)
     }
     
     @objc func handleAppleMapsTap(_ gesture: UITapGestureRecognizer) {
         let locationInView = gesture.location(in: mapView)
         
-        // Define a region in the bottom left corner where the Apple Maps logo is located
         let logoRegion = CGRect(x: 0, y: mapView.bounds.height - 50, width: 50, height: 50)
         
         if logoRegion.contains(locationInView) {
-            // Open Apple Maps app
             if let url = URL(string: "http://maps.apple.com/") {
                 UIApplication.shared.open(url)
             }
@@ -306,11 +265,6 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func fetchInformation(for coordinate: CLLocationCoordinate2D) {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) { (placemarks, error) in
-            if let error = error {
-                print("Error fetching location info: \(error.localizedDescription)")
-                return
-            }
-            
             if let placemark = placemarks?.first {
                 var locationInfo = "Details about the location:\n"
                 
@@ -351,24 +305,18 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func updateUserCurrentLocation() {
-        // Assuming you have a CLLocationManager instance set up and permissions granted
         userCurrentLocation = locationManager.location
     }
     
-    
-    // MARK: - UIPickerView DataSource and Delegate
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        print("numberOfComponents called for pickerView: \(pickerView)") // Debugging statement
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        print("numberOfRowsInComponent called for pickerView: \(pickerView)") // Debugging statement
         return pickerView == gymPickerView ? gyms.count : trainers.count
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        print("attributedTitleForRow called for pickerView: \(pickerView) and row: \(row)") // Debugging statement
         var title = ""
         if pickerView == gymPickerView {
             title = gyms[row]
@@ -409,9 +357,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let selectedGym = gyms[row]
             fetchGymInfo(by: selectedGym)
         } else {
-            // Check if trainers array is not empty
             guard !trainers.isEmpty else {
-                print("No trainers available.")
                 showAlert(title: "No Trainers", message: "No trainers available at the selected gym.")
                 return
             }

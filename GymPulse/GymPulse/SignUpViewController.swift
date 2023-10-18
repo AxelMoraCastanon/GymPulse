@@ -1,10 +1,3 @@
-//
-//  SignUpViewController.swift
-//  GymPulse
-//
-//  Created by Axel Mora on 10/3/23.
-//
-
 import UIKit
 
 class SignUpViewController: UIViewController {
@@ -16,9 +9,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var TrainerSegmentView: UIView!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        super.viewDidLoad()        
         self.view.bringSubviewToFront(ClientSegmentView)
     }
 
@@ -32,8 +23,4 @@ class SignUpViewController: UIViewController {
             break
         }
     }
-    
-    
-    
 }
-

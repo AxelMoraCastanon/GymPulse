@@ -1,0 +1,16 @@
+PODS:
+  - CalendarKit (1.1.9)
+
+DEPENDENCIES:
+  - CalendarKit
+
+SPEC REPOS:
+  trunk:
+    - CalendarKit
+
+SPEC CHECKSUMS:
+  CalendarKit: 0c19eabfc09a6d2b32d2e7fe392e2fe5996622af
+
+PODFILE CHECKSUM: ffc93ed9a0df792108a2f71827f04099e2f20a79
+
+COCOAPODS: 1.13.0

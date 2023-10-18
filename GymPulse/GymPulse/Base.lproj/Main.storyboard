@@ -572,7 +572,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xke-GB-4m5">
-                                <rect key="frame" x="206" y="464" width="80" height="34.333333333333314"/>
+                                <rect key="frame" x="206" y="464" width="80" height="48.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="5s4-0v-A0y"/>
                                     <constraint firstAttribute="height" constant="34.329999999999998" id="Hf3-sq-DR8"/>
@@ -587,7 +587,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BE8-sH-f0s">
-                                <rect key="frame" x="70" y="467" width="101" height="35"/>
+                                <rect key="frame" x="70" y="467" width="101" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="7r0-51-W9q"/>
                                     <constraint firstAttribute="width" constant="101" id="uz4-q1-tLv"/>
@@ -667,7 +667,7 @@
         <!--Sessions-->
         <scene sceneID="tCC-by-Gbq">
             <objects>
-                <viewController title="Sessions" modalPresentationStyle="fullScreen" id="6b9-H0-d9c" sceneMemberID="viewController">
+                <viewController title="Sessions" modalPresentationStyle="fullScreen" id="6b9-H0-d9c" customClass="SessionsViewController" customModule="GymPulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dnc-Aa-6N2">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="658.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -678,7 +678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ram-8X-ScH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4389" y="538"/>
+            <point key="canvasLocation" x="4388.5496183206105" y="537.67605633802816"/>
         </scene>
         <!--Payments-->
         <scene sceneID="gYv-TW-df5">

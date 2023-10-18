@@ -1,10 +1,3 @@
-//
-//  trainerInformationController.swift
-//  GymPulse
-//
-//  Created by Axel Mora on 10/10/23.
-//
-
 import UIKit
 
 class trainerInformationController: UIViewController {
@@ -25,7 +18,6 @@ class trainerInformationController: UIViewController {
     }
 
     private func setupTextFields() {
-        // Ensure the user cannot edit the text fields
         firstNameTF.isUserInteractionEnabled = false
         lastNameTF.isUserInteractionEnabled = false
         emailTF.isUserInteractionEnabled = false
@@ -33,7 +25,6 @@ class trainerInformationController: UIViewController {
     }
 
     private func populateTrainerInfo() {
-        // Populate the text fields with the trainer's information
         if let firstName = trainerInfo["first_name"] as? String {
             firstNameTF.text = firstName
         } else {

@@ -1,4 +1,3 @@
-// LogInViewController.swift
 import UIKit
 
 class LogInViewController: UIViewController {

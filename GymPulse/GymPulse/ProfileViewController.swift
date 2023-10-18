@@ -1,4 +1,3 @@
-// ProfileViewController.swift
 import UIKit
 
 class ProfileViewController: UIViewController {
@@ -22,12 +21,10 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add tap gesture recognizer to dismiss keyboard
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
         
-        // Initialize the state of the text fields and buttons
         initializeProfileState()
     }
 
@@ -36,7 +33,6 @@ class ProfileViewController: UIViewController {
     }
 
     func initializeProfileState() {
-        // Clear all text fields
         firstNameTF.text = ""
         lastNameTF.text = ""
         emailTF.text = ""
@@ -45,20 +41,16 @@ class ProfileViewController: UIViewController {
         gymNameTF.text = ""
         gymAddressTF.text = ""
         
-        // Disable all text fields initially
         setTextFieldEditableState(to: false)
         
-        // Disable email and gymName text fields
         emailTF.isUserInteractionEnabled = false
         gymNameTF.isUserInteractionEnabled = false
         
-        // Grey out and disable the verifyInfo and update buttons
         verifyInfoButton.isEnabled = false
         verifyInfoButton.alpha = 0.5
         updateButton.isEnabled = false
         updateButton.alpha = 0.5
         
-        // Display the role selection alert
         displayUserRoleAlert()
     }
 
@@ -82,12 +74,10 @@ class ProfileViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
-    
     @IBAction func verifyInfoButtonPressed(_ sender: UIButton) {
-        print("verifyInfoButtonPressed started") // Print statement added here
+        print("verifyInfoButtonPressed started")
 
         if isClient {
-            // Fetch client_id using get_client_id.php
             guard let email = emailTF.text, !email.isEmpty else {
                 displayError(message: "Please enter an email.")
                 return
@@ -99,7 +89,6 @@ class ProfileViewController: UIViewController {
                     self.clientId = id
                     self.displayUpdateInformationAlert()
                     
-                    // Enable the update button if any of the text fields have content
                     if !(self.firstNameTF.text?.isEmpty ?? true) || !(self.lastNameTF.text?.isEmpty ?? true) || !(self.emailTF.text?.isEmpty ?? true) || !(self.phoneNumberTF.text?.isEmpty ?? true) || !(self.passwordTF.text?.isEmpty ?? true) {
                         self.updateButton.isEnabled = true
                         self.updateButton.alpha = 1.0
@@ -109,7 +98,6 @@ class ProfileViewController: UIViewController {
                 }
             }
         } else {
-            // Fetch trainer_id using get_trainer_id.php and location_id using get_location_id.php
             guard let email = emailTF.text, !email.isEmpty, let gymName = gymNameTF.text, !gymName.isEmpty else {
                 displayError(message: "Please enter both email and gym name.")
                 return
@@ -126,8 +114,7 @@ class ProfileViewController: UIViewController {
                             self.locationId = locationId
                             self.displayUpdateInformationAlert()
                             
-                            // Enable the update button if any of the text fields have content
-                            if !(self.firstNameTF.text?.isEmpty ?? true) || !(self.lastNameTF.text?.isEmpty ?? true) || !(self.emailTF.text?.isEmpty ?? true) || !(self.phoneNumberTF.text?.isEmpty ?? true) || !(self.gymNameTF.text?.isEmpty ?? true) || !(self.gymAddressTF.text?.isEmpty ?? true) || !(self.passwordTF.text?.isEmpty ?? true) {
+                            if !(self.firstNameTF.text?.isEmpty ?? true) || !(self.lastNameTF.text?.isEmpty ?? true) || !(self.emailTF.text?.isEmpty ?? true) || !(self.gymNameTF.text?.isEmpty ?? true) || !(self.gymAddressTF.text?.isEmpty ?? true) || !(self.passwordTF.text?.isEmpty ?? true) {
                                 self.updateButton.isEnabled = true
                                 self.updateButton.alpha = 1.0
                             }
@@ -140,8 +127,7 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
-        print("verifyInfoButtonPressed ended") // Print statement added here
-
+        print("verifyInfoButtonPressed ended")
     }
 
     func displayUpdateInformationAlert() {
@@ -154,7 +140,6 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func updateButtonPressed(_ sender: UIButton) {
-        // Capture the text from the text fields on the main thread
         let gymName = gymNameTF.text ?? ""
         let gymAddress = gymAddressTF.text ?? ""
         let firstName = firstNameTF.text ?? ""
@@ -164,7 +149,6 @@ class ProfileViewController: UIViewController {
         let password = passwordTF.text ?? ""
         
         if isClient {
-            // Call update_client.php to update the client's information
             guard let clientId = clientId else {
                 displayError(message: "Client ID not found.")
                 return
@@ -188,7 +172,6 @@ class ProfileViewController: UIViewController {
                 }
             }
         } else {
-            // Call update_trainer.php and/or update_location.php based on the fields filled
             guard let trainerId = trainerId, let locationId = locationId else {
                 displayError(message: "Trainer ID or Location ID not found.")
                 return
@@ -240,7 +223,6 @@ class ProfileViewController: UIViewController {
         gymAddressTF.isUserInteractionEnabled = !isClient && state
     }
 
-
     func fetchAndDisplayUserDetails() {
         if isClient, let clientId = clientId {
             let endpoint = "get_client_by_id.php?client_id=\(clientId)"
@@ -286,7 +268,6 @@ class ProfileViewController: UIViewController {
             "phone_number": phoneNumberTF.text ?? ""
         ]
         
-        // Check if the password field is not empty and add it to the parameters
         if let password = passwordTF.text, !password.isEmpty {
             parameters["password"] = password
         }
@@ -339,7 +320,6 @@ class ProfileViewController: UIViewController {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // Print the parameters dictionary to verify the data being sent
         print("Sending parameters to \(endpoint): \(parameters)")
         
         do {
@@ -351,7 +331,6 @@ class ProfileViewController: UIViewController {
         }
 
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            // Place the provided snippet here
             guard let data = data, error == nil, let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                 if let error = error {
                     print("Network error:", error.localizedDescription)
@@ -375,12 +354,12 @@ class ProfileViewController: UIViewController {
     }
 
     func fetchData(endpoint: String, completion: @escaping ([String: Any]) -> Void) {
-        print("fetchData started with endpoint: \(endpoint)") // Print statement added here
+        print("fetchData started with endpoint: \(endpoint)")
 
         let url = URL(string: baseURL + endpoint)!
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil, let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                print("fetchData error or no data received for endpoint: \(endpoint)") // Print statement added here
+                print("fetchData error or no data received for endpoint: \(endpoint)")
                 return
             }
             
@@ -391,7 +370,7 @@ class ProfileViewController: UIViewController {
         
         task.resume()
 
-        print("fetchData task resumed for endpoint: \(endpoint)") // Print statement added here
+        print("fetchData task resumed for endpoint: \(endpoint)")
     }
 
     func displayError(message: String) {
