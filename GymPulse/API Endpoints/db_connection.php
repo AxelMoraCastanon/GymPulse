@@ -1,11 +1,9 @@
 <?php
-$config = include 'db_config.php';
-
-$host = $config['host'];
-$db   = $config['db'];
-$user = $config['user'];
-$pass = $config['pass'];
-$charset = $config['charset'];
+$host = getenv('DB_HOST');
+$db   = getenv('DB_NAME');
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASS');
+$charset = getenv('DB_CHARSET');
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
