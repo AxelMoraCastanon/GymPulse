@@ -6,14 +6,23 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     private var calendarView: DayView!
     private var sessions: [Event] = []
     private var fetchedSchedules: [[String: Any]] = []
+    private var userEmail: String?
+    private var isUserClient: Bool = true
+
     let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         promptUserType()
+        setupRefreshButton()
     }
-    
+
+    func setupRefreshButton() {
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshCalendar))
+        navigationItem.rightBarButtonItem = refreshButton
+    }
+
     func setupUI() {
         calendarView = DayView()
         calendarView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,13 +57,53 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
         }
         alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { _ in
             if let email = alert.textFields?.first?.text {
+                self.userEmail = email
+                self.isUserClient = isClient
                 self.fetchID(email: email, isClient: isClient)
             }
         }))
         present(alert, animated: true)
     }
 
+    @objc func refreshCalendar() {
+        guard let email = userEmail else {
+            showAlertWith(message: "Please enter your email first.")
+            return
+        }
+        
+        let alert = UIAlertController(title: "Refresh Calendar", message: "Do you want to use the current email (\(email)) or re-enter a new one?", preferredStyle: .alert)
+        
+        // Use current email
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            self.fetchID(email: email, isClient: self.isUserClient)
+        }))
+        
+        // Re-enter email
+        alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in
+            self.promptUserType()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+
+    func showAlertWith(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        // Add an action to re-enter email
+        alert.addAction(UIAlertAction(title: "Re-enter Email", style: .default, handler: { _ in
+            self.promptUserType()
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+
+    
     func fetchID(email: String, isClient: Bool) {
+        sessions.removeAll() // Clear the sessions array
+
         guard let unwrappedBaseURL = baseURL else {
             print("Error fetching baseURL")
             return
@@ -76,6 +125,7 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     }
 
     func fetchScheduleID(id: String, isClient: Bool) {
+        fetchedSchedules.removeAll() // Clear the fetchedSchedules array
         guard let unwrappedBaseURL = baseURL else {
             print("Error fetching baseURL")
             return
