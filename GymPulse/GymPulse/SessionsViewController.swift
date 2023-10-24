@@ -285,8 +285,12 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
                             
                             let event = Event()
 
-                            if let startDate = start, let endDate = end {
+                            if let startDate = start, let endDate = end, startDate < endDate {
+                                print("Start Date: \(startDate), End Date: \(endDate)")
                                 event.dateInterval = DateInterval(start: startDate, end: endDate)
+                            } else {
+                                // Handle the error, perhaps log it or show an error message
+                                print("Error: Start date is after the end date.")
                             }
 
                             if let workoutType = session["workout_type"] as? String,
