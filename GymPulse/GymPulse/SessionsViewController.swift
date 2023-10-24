@@ -66,7 +66,7 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
                 self.fetchID(email: email, isClient: isClient) { fetchedID in
                     // Refresh the calendar with the fetched ID
                     if let fetchedID = fetchedID {
-                        self.fetchScheduleID(id: fetchedID, isClient: isClient)
+                        self.fetchScheduleID(id: String(fetchedID), isClient: isClient)
                     } else {
                         // Handle the error if the ID is not fetched
                         self.showErrorAlert(message: "Failed to fetch ID. Please try again.")
@@ -94,11 +94,15 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
                 // Fetch the ID again
                 self.fetchID(email: email, isClient: self.isUserClient) { fetchedID in
                     if self.isUserClient {
-                        self.clientID = fetchedID
+                        if let fetchedIDInt = fetchedID {
+                            self.clientID = String(fetchedIDInt)
+                        } else {
+                            self.clientID = nil
+                        }
                     }
                     // Refresh the calendar with the fetched ID
                     if let fetchedID = fetchedID {
-                        self.fetchScheduleID(id: fetchedID, isClient: self.isUserClient)
+                        self.fetchScheduleID(id: String(fetchedID), isClient: self.isUserClient)
                     } else {
                         // Handle the error if the ID is not fetched
                         self.showErrorAlert(message: "Failed to fetch ID. Please try again.")
@@ -130,7 +134,7 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     }
 
     
-    func fetchID(email: String, isClient: Bool, completion: @escaping (String?) -> Void) {
+    func fetchID(email: String, isClient: Bool, completion: @escaping (Int?) -> Void) {
         sessions.removeAll() // Clear the sessions array
         print("Starting fetchID function with email: \(email) and isClient: \(isClient)")
 
@@ -170,10 +174,12 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                     print("Parsed JSON: \(json)")
-                    if let idInt = json[isClient ? "client_id" : "trainer_id"] as? Int {
-                        let id = String(idInt)
+                    if let id = json[isClient ? "client_id" : "trainer_id"] as? Int {
                         print("Successfully fetched ID: \(id)")
                         DispatchQueue.main.async {
+                            if isClient {
+                                self.clientID = String(id)
+                            }
                             completion(id)
                         }
                     } else {
@@ -393,7 +399,13 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
                         self.showErrorAlert(message: "Failed to fetch trainer ID. Please try again.")
                         return
                     }
-                    self.addSchedule(clientID: self.clientID!, trainerID: trainerID, date: date)
+                    
+                    guard let clientID = self.clientID else {
+                        self.showErrorAlert(message: "Client ID is not set.")
+                        return
+                    }
+
+                    self.addSchedule(clientID: String(clientID), trainerID: String(trainerID), date: date)
                 }
             }
         } else {
@@ -409,7 +421,7 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
                     return
                 }
                 
-                self.fetchLocationID(trainerID: trainerID) { locationID in
+                self.fetchLocationID(trainerID: String(trainerID)) { locationID in
                     guard let locationID = locationID else {
                         self.showErrorAlert(message: "Failed to fetch location ID. Please try again.")
                         return
@@ -422,7 +434,7 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
                                 self.showErrorAlert(message: "Failed to fetch client ID. Please try again.")
                                 return
                             }
-                            self.addSchedule(clientID: clientID, trainerID: trainerID, date: date, locationID: locationID)
+                            self.addSchedule(clientID: String(clientID), trainerID: String(trainerID), date: date, locationID: String(locationID))
                         }
                     }
                 }
