@@ -240,11 +240,12 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
                             }
                         }
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        self.showErrorAlert(message: "Failed to parse server response.")
-                    }
                 }
+//                else {
+//                    DispatchQueue.main.async {
+//                        self.showErrorAlert(message: "Failed to parse server response.")
+//                    }
+//                }
             } catch {
                 DispatchQueue.main.async {
                     self.showErrorAlert(message: "Error processing server response.")
@@ -294,8 +295,10 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
                             }
 
                             if let workoutType = session["workout_type"] as? String,
-                               let durationMinutes = session["duration_minutes"] as? Int {
-                                event.text = "Workout Type: \(workoutType) Minutes: \(durationMinutes)"
+                               let durationMinutes = session["duration_minutes"] as? Int,
+                               let sessionId = session["session_id"] as? Int, // Extract session_id
+                               let scheduleId = session["schedule_id"] as? Int { // Extract schedule_id
+                                event.text = "Workout Type: \(workoutType) Minutes: \(durationMinutes) Session ID: \(sessionId) Schedule ID: \(scheduleId)"
                             }
 
                             self.sessions.append(event)
@@ -668,6 +671,127 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
         }.resume()
     }
 
+    func updateTrainingSession(event: EventDescriptor) {
+        guard let event = event as? Event else { return }
+
+        // Prompt for date
+        let dateAlert = UIAlertController(title: "Update Date", message: "Enter the date in YYYY/MM/DD format", preferredStyle: .alert)
+        dateAlert.addTextField { (textField) in
+            textField.placeholder = "YYYY/MM/DD"
+            textField.keyboardType = .numbersAndPunctuation
+        }
+
+        let dateAction = UIAlertAction(title: "Next", style: .default) { _ in
+            if let dateString = dateAlert.textFields?.first?.text, self.isValidDate(dateString: dateString) {
+
+                // Prompt for time
+                let timeAlert = UIAlertController(title: "Update Time", message: "Enter the time in hh:mm AM/PM format", preferredStyle: .alert)
+                timeAlert.addTextField { (textField) in
+                    textField.placeholder = "hh:mm AM/PM"
+                    textField.keyboardType = .numbersAndPunctuation
+                }
+
+                let timeAction = UIAlertAction(title: "Update", style: .default) { _ in
+                    if let timeString = timeAlert.textFields?.first?.text, let convertedTime = self.convertTo24HourFormat(timeString: timeString) {
+                        let sessionID = event.text.components(separatedBy: "Session ID: ").last?.components(separatedBy: " ").first
+                        let scheduleID = event.text.components(separatedBy: "Schedule ID: ").last
+                        let workoutType = event.text.components(separatedBy: "Workout Type: ").last?.components(separatedBy: " ").first
+                        let durationMinutes = Int(event.text.components(separatedBy: "Minutes: ").last?.components(separatedBy: " ").first ?? "")
+                        
+                        // Send the updated details to the server
+                        self.updateScheduleAndSession(sessionID: sessionID, scheduleID: scheduleID, sessionDate: dateString, startTime: convertedTime, endTime: nil, workoutType: workoutType, durationMinutes: durationMinutes)
+                    } else {
+                        self.showErrorAlert(message: "Invalid time format. Please enter time in hh:mm AM/PM format.")
+                    }
+                }
+
+                timeAlert.addAction(timeAction)
+                timeAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(timeAlert, animated: true, completion: nil)
+
+            } else {
+                self.showErrorAlert(message: "Invalid date format. Please enter date in YYYY/MM/DD format.")
+            }
+        }
+
+        dateAlert.addAction(dateAction)
+        dateAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(dateAlert, animated: true, completion: nil)
+    }
+
+    func isValidDate(dateString: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        return dateFormatter.date(from: dateString) != nil
+    }
+
+    func convertTo24HourFormat(timeString: String) -> String? {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "hh:mm a"
+        if let date = inputFormatter.date(from: timeString) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "HH:mm:ss"
+            return outputFormatter.string(from: date)
+        }
+        return nil
+    }
+
+    func updateScheduleAndSession(sessionID: String?, scheduleID: String?, sessionDate: String?, startTime: String?, endTime: String?, workoutType: String?, durationMinutes: Int?) {
+        guard let baseURL = self.baseURL, let updateURL = URL(string: baseURL + "update_session.php") else {
+            print("Error constructing URL")
+            return
+        }
+
+        var request = URLRequest(url: updateURL)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let payload: [String: Any] = [
+            "session_id": sessionID ?? "",
+            "schedule_id": scheduleID ?? "",
+            "session_date": sessionDate ?? "",
+            "start_time": startTime ?? "",
+            "end_time": endTime ?? "",
+            "workout_type": workoutType ?? "",
+            "duration_minutes": durationMinutes ?? 0
+        ]
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.showErrorAlert(message: "Network error: \(error.localizedDescription)")
+                }
+                return
+            }
+
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    self.showErrorAlert(message: "No data received from server")
+                }
+                return
+            }
+
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                if let jsonDict = jsonResponse as? [String: Any], let status = jsonDict["status"] as? String, status == "success" {
+                    DispatchQueue.main.async {
+                        self.showAlertWith(message: "Successfully updated!")
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showErrorAlert(message: "Failed to update. Please try again.")
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.showErrorAlert(message: "Error parsing response: \(error.localizedDescription)")
+                }
+            }
+        }.resume()
+    }
+
     
     func eventsForDate(_ date: Date) -> [EventDescriptor] {
         return sessions.filter { Calendar.current.isDate($0.dateInterval.start, inSameDayAs: date) }
@@ -678,7 +802,102 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     }
 
     func dayViewDidLongPressEventView(_ eventView: EventView) {
-        print("Long pressed event: \(String(describing: eventView.descriptor))")
+        guard let event = eventView.descriptor as? Event else { return }
+
+        // Prompt for date
+        let dateAlert = UIAlertController(title: "Update Date", message: "Enter the date in YYYY/MM/DD format", preferredStyle: .alert)
+        dateAlert.addTextField { (textField) in
+            textField.placeholder = "YYYY/MM/DD"
+            textField.keyboardType = .numbersAndPunctuation
+        }
+
+        let dateAction = UIAlertAction(title: "Next", style: .default) { _ in
+            if let dateString = dateAlert.textFields?.first?.text, self.isValidDate(dateString: dateString) {
+
+                // Prompt for start time
+                let startTimeAlert = UIAlertController(title: "Update Start Time", message: "Enter the start time in hh:mm AM/PM format", preferredStyle: .alert)
+                startTimeAlert.addTextField { (textField) in
+                    textField.placeholder = "hh:mm AM/PM"
+                    textField.keyboardType = .numbersAndPunctuation
+                }
+
+                let startTimeAction = UIAlertAction(title: "Next", style: .default) { _ in
+                    if let startTimeString = startTimeAlert.textFields?.first?.text, let convertedStartTime = self.convertTo24HourFormat(timeString: startTimeString) {
+                        
+                        // Prompt for end time
+                        let endTimeAlert = UIAlertController(title: "Update End Time", message: "Enter the end time in hh:mm AM/PM format", preferredStyle: .alert)
+                        endTimeAlert.addTextField { (textField) in
+                            textField.placeholder = "hh:mm AM/PM"
+                            textField.keyboardType = .numbersAndPunctuation
+                        }
+                        
+                        let endTimeAction = UIAlertAction(title: "Next", style: .default) { _ in
+                            if let endTimeString = endTimeAlert.textFields?.first?.text, let convertedEndTime = self.convertTo24HourFormat(timeString: endTimeString) {
+                                
+                                // Continue with the rest of the details
+                                let alert = UIAlertController(title: "Update Session", message: "Enter the updated details", preferredStyle: .alert)
+                                
+                                alert.addTextField { (textField) in
+                                    textField.placeholder = "Session ID"
+                                    textField.text = event.text.components(separatedBy: "Session ID: ").last?.components(separatedBy: " ").first
+                                }
+                                
+                                alert.addTextField { (textField) in
+                                    textField.placeholder = "Schedule ID"
+                                    textField.text = event.text.components(separatedBy: "Schedule ID: ").last
+                                }
+                                
+                                alert.addTextField { (textField) in
+                                    textField.placeholder = "Workout Type"
+                                    textField.text = event.text.components(separatedBy: "Workout Type: ").last?.components(separatedBy: " ").first
+                                }
+                                
+                                alert.addTextField { (textField) in
+                                    textField.placeholder = "Duration (minutes)"
+                                    textField.text = event.text.components(separatedBy: "Minutes: ").last?.components(separatedBy: " ").first
+                                }
+                                
+                                let updateAction = UIAlertAction(title: "Update", style: .default) { _ in
+                                    // Extract updated details from the alert's text fields
+                                    let sessionID = alert.textFields?[0].text
+                                    let scheduleID = alert.textFields?[1].text
+                                    let workoutType = alert.textFields?[2].text
+                                    let durationMinutes = Int(alert.textFields?[3].text ?? "")
+                                    
+                                    // Send the updated details to the server
+                                    self.updateScheduleAndSession(sessionID: sessionID, scheduleID: scheduleID, sessionDate: dateString, startTime: convertedStartTime, endTime: convertedEndTime, workoutType: workoutType, durationMinutes: durationMinutes)
+                                }
+                                
+                                alert.addAction(updateAction)
+                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                
+                                self.present(alert, animated: true)
+                            } else {
+                                self.showErrorAlert(message: "Invalid end time format. Please enter time in hh:mm AM/PM format.")
+                            }
+                        }
+                        
+                        endTimeAlert.addAction(endTimeAction)
+                        endTimeAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        self.present(endTimeAlert, animated: true, completion: nil)
+                        
+                    } else {
+                        self.showErrorAlert(message: "Invalid start time format. Please enter time in hh:mm AM/PM format.")
+                    }
+                }
+
+                startTimeAlert.addAction(startTimeAction)
+                startTimeAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(startTimeAlert, animated: true, completion: nil)
+
+            } else {
+                self.showErrorAlert(message: "Invalid date format. Please enter date in YYYY/MM/DD format.")
+            }
+        }
+
+        dateAlert.addAction(dateAction)
+        dateAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(dateAlert, animated: true, completion: nil)
     }
 
     func dayView(dayView: DayView, didTapTimelineAt date: Date) {
@@ -709,3 +928,4 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
         print("Updated event: \(event)")
     }
 }
+

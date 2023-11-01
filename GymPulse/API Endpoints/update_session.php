@@ -1,25 +1,79 @@
 <?php
-include 'db_connection.php';
+header('Content-Type: application/json');
+require 'db_connection.php';
+
+// Log the received JSON payload to verify the server is receiving the correct data
+file_put_contents('log.txt', file_get_contents("php://input"));
 
 $data = json_decode(file_get_contents("php://input"));
 
-$response = array();
+// Check and update schedules
+if(isset($data->schedule_id)) {
+    $fields = [];
+    $values = [];
 
-if (isset($data->session_id) && isset($data->schedule_id) && isset($data->workout_type) && isset($data->duration_minutes)) {
-    $stmt = $pdo->prepare("UPDATE training_sessions SET schedule_id = ?, workout_type = ?, duration_minutes = ? WHERE session_id = ?");
-    $result = $stmt->execute([$data->schedule_id, $data->workout_type, $data->duration_minutes, $data->session_id]);
-
-    if ($result) {
-        $response['success'] = true;
-        $response['message'] = "Session updated successfully.";
-    } else {
-        $response['success'] = false;
-        $response['message'] = "Failed to update session.";
+    if(isset($data->session_date)) {
+        $fields[] = "session_date = ?";
+        $values[] = $data->session_date;
     }
-} else {
-    $response['success'] = false;
-    $response['message'] = "Required fields are missing.";
+    if(isset($data->start_time)) {
+        $fields[] = "start_time = ?";
+        $values[] = $data->start_time;
+    }
+    if(isset($data->end_time)) {
+        $fields[] = "end_time = ?";
+        $values[] = $data->end_time;
+    }
+
+    if(!empty($fields)) {
+        $values[] = $data->schedule_id;
+        $sql = "UPDATE schedules SET " . implode(", ", $fields) . " WHERE schedule_id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($values);
+
+        // Check for SQL errors after executing the query and log them
+        $errorInfo = $stmt->errorInfo();
+        if ($errorInfo[0] !== '00000') { // '00000' means no error
+            file_put_contents('log.txt', $errorInfo[2]); // Log the error message
+            echo json_encode(["status" => "error", "message" => $errorInfo[2]]);
+            exit;
+        }
+    }
 }
 
-echo json_encode($response);
+// Check and update training_sessions
+if(isset($data->session_id)) {
+    $fields = [];
+    $values = [];
+
+    if(isset($data->workout_type)) {
+        $fields[] = "workout_type = ?";
+        $values[] = $data->workout_type;
+    }
+    if(isset($data->duration_minutes)) {
+        $fields[] = "duration_minutes = ?";
+        $values[] = $data->duration_minutes;
+    }
+
+    if(!empty($fields)) {
+        $values[] = $data->session_id;
+        $sql = "UPDATE training_sessions SET " . implode(", ", $fields) . " WHERE session_id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($values);
+
+        // Check for SQL errors after executing the query and log them
+        $errorInfo = $stmt->errorInfo();
+        if ($errorInfo[0] !== '00000') { // '00000' means no error
+            file_put_contents('log.txt', $errorInfo[2]); // Log the error message
+            echo json_encode(["status" => "error", "message" => $errorInfo[2]]);
+            exit;
+        } else {
+            echo json_encode(["status" => "success", "message" => "Both schedules and training sessions updated successfully!"]);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "No valid fields provided for training sessions"]);
+    }
+} else {
+    echo json_encode(["status" => "error", "message" => "No session_id provided"]);
+}
 ?>
