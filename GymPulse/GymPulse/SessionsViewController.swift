@@ -796,12 +796,8 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
     func eventsForDate(_ date: Date) -> [EventDescriptor] {
         return sessions.filter { Calendar.current.isDate($0.dateInterval.start, inSameDayAs: date) }
     }
-
+    
     func dayViewDidSelectEventView(_ eventView: EventView) {
-        print("Selected event: \(String(describing: eventView.descriptor))")
-    }
-
-    func dayViewDidLongPressEventView(_ eventView: EventView) {
         guard let event = eventView.descriptor as? Event else { return }
 
         // Prompt for date
@@ -898,8 +894,90 @@ class SessionsViewController: UIViewController, DayViewDelegate, EventDataSource
         dateAlert.addAction(dateAction)
         dateAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(dateAlert, animated: true, completion: nil)
+
     }
 
+    func dayViewDidLongPressEventView(_ eventView: EventView) {
+        guard let event = eventView.descriptor as? Event else { return }
+
+        let alert = UIAlertController(title: "Cancel Session", message: "Enter the session_id and schedule_id to cancel the session", preferredStyle: .alert)
+
+        alert.addTextField { textField in
+            textField.placeholder = "Session ID"
+        }
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Schedule ID"
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel Session", style: .destructive) { [weak self] _ in
+            guard let sessionID = alert.textFields?.first?.text, let scheduleID = alert.textFields?.last?.text else {
+                self?.showErrorAlert(message: "Please enter both session_id and schedule_id.")
+                return
+            }
+            
+            self?.deleteSession(sessionID: sessionID, scheduleID: scheduleID)
+        }
+
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel)
+
+        alert.addAction(cancelAction)
+        alert.addAction(dismissAction)
+
+        present(alert, animated: true)
+    }
+
+    func deleteSession(sessionID: String, scheduleID: String) {
+        guard let baseURL = self.baseURL, let url = URL(string: baseURL + "delete_session.php") else {
+            showErrorAlert(message: "Error constructing URL for deletion.")
+            return
+        }
+
+        let payload: [String: Any] = [
+            "session_id": sessionID,
+            "schedule_id": scheduleID
+        ]
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
+
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.showErrorAlert(message: "Network error: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let data = data else {
+                    self?.showErrorAlert(message: "Failed to receive data from server.")
+                    return
+                }
+
+                do {
+                    if let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                       let trainingSessionsResponse = jsonResponse["training_sessions"] as? [String: Any],
+                       let schedulesResponse = jsonResponse["schedules"] as? [String: Any] {
+                        
+                        if trainingSessionsResponse["status"] as? String == "success" && schedulesResponse["status"] as? String == "success" {
+                            self?.showAlertWith(message: "Training session cancelled successfully.")
+                            // Call fetchSessions to refresh the calendar view
+                            self?.fetchSessions(scheduleID: scheduleID)
+                        } else {
+                            let message = trainingSessionsResponse["message"] as? String ?? schedulesResponse["message"] as? String ?? "Unknown error occurred while cancelling session."
+                            self?.showErrorAlert(message: message)
+                        }
+                    } else {
+                        self?.showErrorAlert(message: "Error processing server response.")
+                    }
+                } catch {
+                    self?.showErrorAlert(message: "Error parsing response: \(error.localizedDescription)")
+                }
+            }
+        }.resume()
+    }
+    
     func dayView(dayView: DayView, didTapTimelineAt date: Date) {
         addSessionAt(date: date)
     }
