@@ -7,5 +7,6 @@ target 'GymPulse' do
 
   # Pods for GymPulse
   pod 'CalendarKit'
+  pod 'StripePaymentSheet'
 
 end

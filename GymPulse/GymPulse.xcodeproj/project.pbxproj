@@ -11,6 +11,7 @@
 		510919022AD0D72A003988A5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510919012AD0D72A003988A5 /* ProfileViewController.swift */; };
 		5118CA852ADE29010064C158 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5118CA842ADE29010064C158 /* SessionsViewController.swift */; };
 		5173B9C82ACCFED500393541 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5173B9C72ACCFED500393541 /* SignUpViewController.swift */; };
+		51DBC6172B021BF400ECF3C6 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DBC6162B021BF400ECF3C6 /* CheckoutViewController.swift */; };
 		51E2F30E2AD52DD900980E56 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2F30D2AD52DD900980E56 /* ContactViewController.swift */; };
 		51E2F3102AD52E3100980E56 /* trainerInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2F30F2AD52E3100980E56 /* trainerInformationController.swift */; };
 		51F521BA2AAC3094002F2AAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F521B92AAC3094002F2AAC /* AppDelegate.swift */; };
@@ -26,14 +27,31 @@
 		51FD621E2ACD23640029B130 /* TrainerSignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD621D2ACD23640029B130 /* TrainerSignUpController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		51ED00D32B020F98002D4EE0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		449E22D1E7675E581A034223 /* Pods-GymPulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymPulse.debug.xcconfig"; path = "Target Support Files/Pods-GymPulse/Pods-GymPulse.debug.xcconfig"; sourceTree = "<group>"; };
 		510919012AD0D72A003988A5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5118CA842ADE29010064C158 /* SessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
 		516F746F2ADFA6D40056DDD0 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		5173B9C72ACCFED500393541 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		51DBC6162B021BF400ECF3C6 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		51E2F30D2AD52DD900980E56 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		51E2F30F2AD52E3100980E56 /* trainerInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trainerInformationController.swift; sourceTree = "<group>"; };
+		51ED00BB2B020F98002D4EE0 /* StripePaymentSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StripePaymentSheet.h; sourceTree = "<group>"; };
+		51ED00BC2B020F98002D4EE0 /* StripePaymentSheet.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StripePaymentSheet.docc; sourceTree = "<group>"; };
+		51ED00C92B020F98002D4EE0 /* StripePaymentSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripePaymentSheetTests.swift; sourceTree = "<group>"; };
 		51F521B62AAC3094002F2AAC /* GymPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F521B92AAC3094002F2AAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51F521BB2AAC3094002F2AAC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,10 +81,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		51ED00BA2B020F98002D4EE0 /* StripePaymentSheet */ = {
+			isa = PBXGroup;
+			children = (
+				51ED00BB2B020F98002D4EE0 /* StripePaymentSheet.h */,
+				51ED00BC2B020F98002D4EE0 /* StripePaymentSheet.docc */,
+			);
+			path = StripePaymentSheet;
+			sourceTree = "<group>";
+		};
+		51ED00C82B020F98002D4EE0 /* StripePaymentSheetTests */ = {
+			isa = PBXGroup;
+			children = (
+				51ED00C92B020F98002D4EE0 /* StripePaymentSheetTests.swift */,
+			);
+			path = StripePaymentSheetTests;
+			sourceTree = "<group>";
+		};
 		51F521AD2AAC3094002F2AAC = {
 			isa = PBXGroup;
 			children = (
 				51F521B82AAC3094002F2AAC /* GymPulse */,
+				51ED00BA2B020F98002D4EE0 /* StripePaymentSheet */,
+				51ED00C82B020F98002D4EE0 /* StripePaymentSheetTests */,
 				51F521B72AAC3094002F2AAC /* Products */,
 				711D57D7070EB2A67001B7E5 /* Pods */,
 				C2256B55641348C8CAB77698 /* Frameworks */,
@@ -102,6 +139,7 @@
 				51E2F30F2AD52E3100980E56 /* trainerInformationController.swift */,
 				5118CA842ADE29010064C158 /* SessionsViewController.swift */,
 				516F746F2ADFA6D40056DDD0 /* Config.xcconfig */,
+				51DBC6162B021BF400ECF3C6 /* CheckoutViewController.swift */,
 			);
 			path = GymPulse;
 			sourceTree = "<group>";
@@ -135,6 +173,7 @@
 				51F521B32AAC3094002F2AAC /* Frameworks */,
 				51F521B42AAC3094002F2AAC /* Resources */,
 				E4EBBAA7989FFBEAA1F60768 /* [CP] Embed Pods Frameworks */,
+				51ED00D32B020F98002D4EE0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -155,7 +194,7 @@
 				KnownAssetTags = (
 					clientView,
 				);
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					51F521B52AAC3094002F2AAC = {
@@ -247,6 +286,7 @@
 				51F521BA2AAC3094002F2AAC /* AppDelegate.swift in Sources */,
 				51E2F3102AD52E3100980E56 /* trainerInformationController.swift in Sources */,
 				51FC64282ACD440800E3D442 /* ClientLogInController.swift in Sources */,
+				51DBC6172B021BF400ECF3C6 /* CheckoutViewController.swift in Sources */,
 				5173B9C82ACCFED500393541 /* SignUpViewController.swift in Sources */,
 				51E2F30E2AD52DD900980E56 /* ContactViewController.swift in Sources */,
 				51FC64262ACD431600E3D442 /* LogInViewController.swift in Sources */,

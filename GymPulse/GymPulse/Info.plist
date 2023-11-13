@@ -40,5 +40,8 @@
     <!-- Added BASE_URL key -->
     <key>BASE_URL</key>
     <string>http://ec2-54-219-186-173.us-west-1.compute.amazonaws.com/</string>
+    <!-- Added key for camera permission -->
+    <key>NSCameraUsageDescription</key>
+    <string>Allow the app to scan cards.</string>
 </dict>
 </plist>
